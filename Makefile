@@ -6,11 +6,11 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/23 23:19:40 by mcanal           ###   ########.fr        #
+#    Updated: 2015/02/24 00:33:27 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRC = main.c error.c
+SRC = main.c error.c client.c server.c
 NAME = ft_p
 O_DIR = obj
 C_DIR = src
