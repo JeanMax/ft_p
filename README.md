@@ -4,4 +4,5 @@ TCP/IP Client/Server
 
 ### TODO: ###
 
-* do it
+* error handling (is_digit)
+* close connexion in a pretty way

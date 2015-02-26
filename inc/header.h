@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/24 00:40:53 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/26 20:24:55 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,23 @@
 # define HEADER_H
 # define TRUE 1
 # define FALSE 0
-# define MALLOC 1
-# define USAGE 2
+# define MAX_CLIENTS 1024
+# define S_USAGE_MSG " <port>"
+# define C_USAGE_MSG " <adrr> <port>"
+# define S_USAGE 0
+# define C_USAGE 1
+# define MALLOC 2
 # define PROTO 3
 # define BIND 4
 # define ACCEPT 5
 # define CONNECT 6
-# define USAGE_MSG " <adrr> <port> (client) || <port> (server)"
+# define FORK 7
+# define BUS 8
+# define SEG 9
+# define FPE 10
+# define KILL 11
+# define DEBUG { ft_putstr_clr(__func__, "r"); ft_putstr_clr(" (", "r"); ft_putstr_clr(__FILE__, "red"); ft_putstr_clr(") - line: ", "r"); ft_putnbr_clr(__LINE__, "r"); ft_putendl(""); } //debug
+
 
 /*
 ** include
@@ -37,6 +47,8 @@
 # include <netdb.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+# include <sys/wait.h>
+# include <signal.h>
 
 /*
 ** struct && typedef
@@ -51,7 +63,10 @@ struct		s_env
 ** prototypes
 */
 void		error(char error, char *msg);
+
 void		client(char **av);
+
+void		accept_sock(int sock, pid_t stdin_reader_pid);
 void		server(char **av);
 
 #endif

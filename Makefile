@@ -6,52 +6,53 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/24 00:33:27 by mcanal           ###   ########.fr        #
+#    Updated: 2015/02/26 19:49:50 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SRC = main.c error.c client.c server.c
-NAME = ft_p
+C_SRC = c_main.c client.c
+S_SRC = s_main.c server.c
+COMMON_SRC = error.c
+C_NAME = Client
+S_NAME = Server
 O_DIR = obj
-C_DIR = src
-SRCC = $(SRC:%.c=$(C_DIR)/%.c)
-SRCO = $(SRC:%.c=$(O_DIR)/%.o)
+COMMON_DIR = src
+C_DIR = src/client
+S_DIR = src/server
+VPATH =	src:src/client:src/server
+C_SRCC = $(C_SRC:%.c=$(C_DIR)/%.c) $(COMMON_SRC:%.c=$(COMMON_DIR)/%.c)
+C_SRCO = $(C_SRC:%.c=$(O_DIR)/%.o) $(COMMON_SRC:%.c=$(O_DIR)/%.o)
+S_SRCC = $(S_SRC:%.c=$(S_DIR)/%.c) $(COMMON_SRC:%.c=$(COMMON_DIR)/%.c)
+S_SRCO = $(S_SRC:%.c=$(O_DIR)/%.o) $(COMMON_SRC:%.c=$(O_DIR)/%.o)
 LIB = libft/libft.a
 INC = inc/header.h
 CFLAGS = -Wall -Werror -Wextra -I./inc/
 CC = gcc
 RM = rm -f
 
-.PHONY: all clean fclean zclean re brute debug optimize
+.PHONY: all client server clean fclean zclean re brute
 
 all:
 	@make -C libft
-	@$(MAKE) $(NAME)
+	@$(MAKE) $(C_NAME)
+	@$(MAKE) $(S_NAME)
 
-$(NAME): $(SRCO) $(LIB) $(INC)
-	@$(CC) $(CFLAGS) $(SRCO) $(LIB) -o $@
+$(S_NAME): $(S_SRCO) $(LIB) $(INC)
+	$(CC) $(CFLAGS) $(S_SRCO) $(LIB) -o $@
 
-$(O_DIR)/%.o: $(C_DIR)/%.c
-	@$(RM) $(NAME)
-	@$(CC) $(CFLAGS) -c $^ -o $@
+$(C_NAME): $(C_SRCO) $(LIB) $(INC)
+	$(CC) $(CFLAGS) $(C_SRCO) $(LIB) -o $@
 
-soft:
-	@$(RM) $(NAME)
-	@$(CC) $(SRCC) $(LIB) -o $(NAME)
-	@./$(NAME)
-
-debug: re
-	@$(CC) $(CFLAGS) -ggdb $(SRCO) $(LIB) -o $(NAME)
-	@gdb $(NAME)
-
-optimize: re
-	@$(CC) $(CFLAGS) -O2 $(SRCO) $(LIB) -o $(NAME)
+$(O_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
-	@$(RM) $(SRCO)
+	@$(RM) $(C_SRCO)
+	@$(RM) $(S_SRCO)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(C_NAME)
+	@$(RM) $(S_NAME)
 
 zclean: fclean
 	@make -C libft fclean
