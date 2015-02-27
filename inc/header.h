@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/26 20:24:55 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/27 04:45:54 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define KILL 11
 # define DEBUG { ft_putstr_clr(__func__, "r"); ft_putstr_clr(" (", "r"); ft_putstr_clr(__FILE__, "red"); ft_putstr_clr(") - line: ", "r"); ft_putnbr_clr(__LINE__, "r"); ft_putendl(""); } //debug
 
-
 /*
 ** include
 */
@@ -60,12 +59,25 @@ struct		s_env
 };
 
 /*
-** prototypes
+** common prototypes
 */
 void		error(char error, char *msg);
 
+/*
+** client prototypes
+*/
+void		c_read_stdin(char *line, int sock);
+void		c_read_server(char *line, int sock);
+void		c_sig_init(void);
 void		client(char **av);
 
+/*
+** server prototypes
+*/
+void		s_read_stdin(void);
+void		s_read_client(void);
+void		s_sig_init(void);
+void		s_sig_handl(int sig);
 void		accept_sock(int sock, pid_t stdin_reader_pid);
 void		server(char **av);
 
