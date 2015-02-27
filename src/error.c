@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 19:39:48 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/26 20:28:04 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/27 07:00:38 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,9 @@ void		error(char error, char *msg) //free itoa? //do not exit everytime
 		failn("Floating point exception.");
 	else if (error == KILL)
 		fail("Killing stdin_reader process failed with pid: "), failn(msg);
+	else if (error == EXECV)
+		fail("Execv failed with command: "), failn(msg);
+	else if (error == ENV)
+		failn("Environment not found.");
 	exit(-1);
 }

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:21:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 04:43:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/27 08:06:32 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@ void			s_read_stdin(void)
 {
 	int			 i;
 	char		*line;
+	char		*tmp;
 
-	//DEBUG; //debug
 	signal(SIGINT, s_sig_handl);
 	while (get_line(0, &line))
 	{
+		i = 0;
 		ft_putstr_clr("$Server> ", "g");
 		if (!ft_strcmp(line, "quit"))
 			break ;
 		else if (ft_strlen(line) > 0)
-		{
-			i = 0;
 			while (i <= g_nb)
-				ft_putendl_fd(line, g_cs[i++]);
-		}
+				tmp = ft_strjoin("Server: ", line), \
+					ft_putstr_fd(tmp, g_cs[i++]), ft_memdel((void *)&tmp);
 		ft_memdel((void *)&line);
 	}
 	i = 0;
@@ -44,14 +43,12 @@ void			s_read_stdin(void)
 		ft_putendl_fd("quit", g_cs[i++]);
 	ft_putendl("All clients disconnected.");
 	ft_putstr_clr("$Server> ", "g");
-	//DEBUG; //debug
 }
 
-void			s_read_client(void)
+void			s_read_client(t_env *e)
 {
 	char			*line;
 
-	//DEBUG; //debug
 	!g_nb ? ft_putstr_clr("$Server> ", "g"): NULL;
 	ft_putstr("Hey "), ft_putnbr(g_nb);
 	ft_putstr_clr("\n$Server> ", "g");
@@ -59,12 +56,9 @@ void			s_read_client(void)
 	{
 		if (!ft_strcmp(line, "quit"))
 			break ;
-		else if (!ft_strcmp(line, "whoami"))
-		{
-			ft_putstr_fd("You are the client number ", g_cs[g_nb]);
-			ft_putnbr_fd(g_nb, g_cs[g_nb]);
-			ft_putendl_fd(".", g_cs[g_nb]);
-		}
+		else if (ft_strstr(line, "ls") || !ft_strcmp(line, "pwd") || \
+				 ft_strstr(line, "cd") || !ft_strcmp(line, "whoami"))
+			exec_cmd(line, e); //find better than strstr
 		else if (ft_strlen(line) > 0)
 		{
 			ft_putstr("Client "), ft_putnbr(g_nb), ft_putstr(": ");
@@ -75,5 +69,4 @@ void			s_read_client(void)
 	}
 	ft_putendl_fd("quit", g_cs[g_nb]);
 	ft_putstr("Bye "), ft_putnbr(g_nb), ft_putstr_clr("\n$Server> ", "g");
-	//DEBUG; //debug
 }

@@ -6,12 +6,12 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/27 04:42:28 by mcanal           ###   ########.fr        #
+#    Updated: 2015/02/27 07:14:11 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 C_SRC = c_main.c c_read.c c_signal.c client.c
-S_SRC = s_main.c s_read.c s_signal.c server.c
+S_SRC = s_main.c s_read.c s_signal.c s_exec.c ft_cd.c server.c
 COMMON_SRC = error.c
 C_NAME = Client
 S_NAME = Server

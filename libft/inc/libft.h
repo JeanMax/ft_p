@@ -6,14 +6,14 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/25 01:53:46 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/27 07:48:59 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
-# define BUFF_SIZE 256
+# define BUFF_SIZE 512
 
 # include <string.h>
 # include "edit.h"

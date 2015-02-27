@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 04:38:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/27 07:09:26 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@ static int				create_server(int port)
 	//DEBUG; //debug
 }
 
-static void			recurs_accept(int sock, pid_t stdin_reader_pid)
+static void			recurs_accept(int sock, pid_t stdin_reader_pid, t_env *e)
 {
 	//DEBUG; //debug
-	ft_debugnbr("killed", stdin_reader_pid); //debug
+//	ft_debugnbr("killed", stdin_reader_pid); //debug
 	if (kill(stdin_reader_pid, SIGTERM))
 		if (kill(stdin_reader_pid, SIGKILL))
 			error(KILL, ft_itoa((int)stdin_reader_pid));
 	if ((stdin_reader_pid = fork()) < 0)
 		error(FORK, ft_itoa((int)stdin_reader_pid));
 	else if (stdin_reader_pid) //father
-		accept_sock(sock, stdin_reader_pid);
+		accept_sock(sock, stdin_reader_pid, e);
 	else //son
 		s_read_stdin();
 	//DEBUG; //debug
 }
 
-void			accept_sock(int sock, pid_t stdin_reader_pid)
+void			accept_sock(int sock, pid_t stdin_reader_pid, t_env *e)
 {
 	unsigned int		cslen;
 	struct sockaddr_in	csin;
@@ -63,7 +63,7 @@ void			accept_sock(int sock, pid_t stdin_reader_pid)
 
 	//DEBUG; //debug
 	g_nb++;
-	ft_debugnbr("tokill", stdin_reader_pid); //debug
+//	ft_debugnbr("tokill", stdin_reader_pid); //debug
 	if (!g_nb)
 		ft_putstr_clr("$Server> ", "g"), ft_putendl("Waiting for connexion...");
 	if ((g_cs[g_nb] = accept(sock, (struct sockaddr *)&csin, &cslen)) == -1)
@@ -71,13 +71,13 @@ void			accept_sock(int sock, pid_t stdin_reader_pid)
 	if ((pid = fork()) < 0)
 		error(FORK, ft_itoa((int)pid));
 	else if (pid) //father
-		recurs_accept(sock, stdin_reader_pid);
+		recurs_accept(sock, stdin_reader_pid, e);
 	else //son
-		s_read_client();
+		s_read_client(e);
 	//DEBUG; //debug
 }
 
-void				server(char **av)
+void				server(char **av, t_env *e)
 {
 	int				port;
 	int				sock;
@@ -92,7 +92,7 @@ void				server(char **av)
 	if ((pid = fork()) < 0)
 		error(FORK, ft_itoa((int)pid));
 	else if (pid) //father
-		accept_sock(sock, pid);
+		accept_sock(sock, pid, e);
 	else //son
 		s_read_stdin();
 	close(sock);

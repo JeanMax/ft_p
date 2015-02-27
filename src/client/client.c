@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:08 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 04:44:48 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/02/27 06:37:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void					client(char **av)
 	int				port; //del var?
 	int				sock;
 	pid_t			pid;
-	char			*line;
 
-	line = NULL;
 	port = ft_atoi(av[2]);
 	c_sig_init();
 	sock = create_client(av[1], port);
@@ -48,7 +46,7 @@ void					client(char **av)
 	if ((pid = fork()) < 0)
 		error(FORK, ft_itoa((int)pid));
 	else if (pid) //father
-		c_read_server(line, sock);
+		c_read_server(sock);
 	else //son
-		c_read_stdin(line, sock);
+		c_read_stdin(sock);
 }
