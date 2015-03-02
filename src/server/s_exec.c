@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 10:27:29 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/02 20:41:11 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,18 @@ static void		exec_it(char *cmd, t_env *e)
 		{
 			dup2(1, save_fd[1]), dup2(2, save_fd[0]);
 			dup2(g_cs[g_nb], 1), dup2(g_cs[g_nb], 2);
-//			(execv(tmp, cmd_tab) == -1) ? error(EXECV, cmd) : NULL;
 			save_fd[2] = execv(tmp, cmd_tab) == -1 ? FALSE : TRUE;
-			ft_freestab(cmd_tab);
-			ft_memdel((void *)tmp);
 			dup2(save_fd[1], 1), dup2(save_fd[0], 1);
 			close(save_fd[1]), close(save_fd[0]);
-//			ft_putendl_fd(save_fd[2] ? "SUCCESS" : "ERROR", 1);//g_cs[g_nb]);
 // the best would be to check if stderr is filled with something,
 			//-> if so print ERROR, else SUCCESS
+			wait(NULL);
+		}
+		else
+		{
+			ft_freestab(cmd_tab);
+//		ft_memdel((void *)tmp); LEAK...
+			ft_putendl_fd(save_fd[2] ? "SUCCESSS" : "ERRORR", g_cs[g_nb]);
 		}
 	}
 }

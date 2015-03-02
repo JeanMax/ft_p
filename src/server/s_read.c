@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:21:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 08:06:32 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/02 20:15:41 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void			s_read_client(t_env *e)
 		if (!ft_strcmp(line, "quit"))
 			break ;
 		else if (ft_strstr(line, "ls") || !ft_strcmp(line, "pwd") || \
+				 ft_strstr(line, "cat") || ft_strstr(line, "chmod") || \
+				 ft_strstr(line, "cp") || ft_strstr(line, "mkdir") || \
+				 ft_strstr(line, "mv") || ft_strstr(line, "rm") || \
+				 ft_strstr(line, "sleep") || \
 				 ft_strstr(line, "cd") || !ft_strcmp(line, "whoami"))
 			exec_cmd(line, e); //find better than strstr
 		else if (ft_strlen(line) > 0)
