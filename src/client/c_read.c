@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/02 20:44:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/05 14:24:15 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,16 @@ void				 c_read_stdin(int sock)
 void				 c_read_server(int sock)
 {
 	int			i;
-	char		buf[1024];
+//	char		*line;
+	char		buf[1000000];
 
 	while ((i = read(sock, buf, 1024)) > 0)
+//	while (get_line(sock, &line))
 	{
 		buf[i] = '\0';
-		if (ft_strstr(buf, "quit"))
-			break ;
-		else if (ft_strstr(buf, "Server: "))
+//		if (ft_strstr(buf, "quit"))
+//			break ;
+		if (ft_strstr(buf, "Server: "))
 			ft_putendl(buf), ft_putstr_clr("$Client> ", "g");
 		else if (ft_strlen(buf) > 0)
 			ft_putstr(buf);

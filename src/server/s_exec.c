@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/02 20:41:11 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/05 15:51:13 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@
 extern int		g_cs[MAX_CLIENTS];
 extern int		g_nb;
 
+/*
+static void		get_file(char *name, t_env *e)
+{
+
+}
+
+static void		put_file(char *name, t_env *e)
+{
+
+}
+*/
 char    *get_env(char *var, t_env *e)
 {
 	char    **ae;
