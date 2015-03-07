@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/05 15:51:13 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/07 19:44:26 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,30 @@
 
 extern int		g_cs[MAX_CLIENTS];
 extern int		g_nb;
-
 /*
-static void		get_file(char *name, t_env *e)
+//send file to client
+static void		get_file(char *name)
 {
-
+	int		file_fd;
+	char	*all;
+	
+	if ((file_fd = open(name, O_RDONLY)) < 0)
+		error(OPEN, name);
+	get_all(file_fd, &all);
+	ft_putstr_fd(all, g_cs[g_nb]);
+	close(file_fd);
+	ft_memdel((void *)&all);
 }
 
-static void		put_file(char *name, t_env *e)
+//write client to file
+static void		put_file(char *name, char *all)
 {
-
+	int		file_fd;
+	
+	if ((file_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
+		error(OPEN, name);
+	ft_putstr_fd(all, file_fd);
+	close(file_fd);
 }
 */
 char    *get_env(char *var, t_env *e)

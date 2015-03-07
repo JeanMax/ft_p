@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 19:39:48 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 07:00:38 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/07 19:45:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void		error(char error, char *msg) //free itoa? //do not exit everytime
 		fail("Execv failed with command: "), failn(msg);
 	else if (error == ENV)
 		failn("Environment not found.");
+	else if (error == OPEN)
+		fail("Open failed with file: "), failn(msg);
 	exit(-1);
 }
