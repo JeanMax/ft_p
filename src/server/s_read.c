@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:21:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/07 20:32:04 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/08 23:36:12 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			s_read_client(t_env *e)
 			break ;
 		else if (ft_strstr(line, "ls") || !ft_strcmp(line, "pwd") || \
 				 ft_strstr(line, "cat") || ft_strstr(line, "chmod") || \
-				 ft_strstr(line, "cp") || ft_s  trstr(line, "mkdir") || \
+				 ft_strstr(line, "cp") || ft_strstr(line, "mkdir") || \
 				 ft_strstr(line, "mv") || ft_strstr(line, "rm") || \
 				 ft_strstr(line, "sleep") || \
 				 ft_strstr(line, "cd") || !ft_strcmp(line, "whoami") ||
