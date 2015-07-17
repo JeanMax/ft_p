@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:21:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/08 23:36:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/14 12:16:38 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,40 @@
 extern int		g_cs[MAX_CLIENTS];
 extern int		g_nb;
 
-void			s_read_stdin(void)
-{
-	int			 i;
-	char		*line;
-	char		*tmp;
-
-	signal(SIGINT, s_sig_handl);
-	while (get_line(0, &line))
-	{
-		i = 0;
-		ft_putstr_clr("$Server> ", "g");
-		if (!ft_strcmp(line, "quit"))
-			break ;
-		else if (ft_strlen(line) > 0)
-			while (i <= g_nb)
-				tmp = ft_strjoin("Server: ", line), \
-					ft_putstr_fd(tmp, g_cs[i++]), ft_memdel((void *)&tmp);
-		ft_memdel((void *)&line);
-	}
-	i = 0;
-	while (i <= g_nb)
-		ft_putendl_fd("quit", g_cs[i++]);
-	ft_putendl("All clients disconnected.");
-	ft_putstr_clr("$Server> ", "g");
-}
-
 void			s_read_client(t_env *e)
 {
 //	char			line[1024];
 	char			*line;
 //	int				i;
+	int				c_fd;
 
-	!g_nb ? ft_putstr_clr("$Server> ", "g"): NULL;
+	!g_nb ? ft_putstr_clr("$Server> ", "g"): (void)0;
 	ft_putstr("Hey "), ft_putnbr(g_nb);
 	ft_putstr_clr("\n$Server> ", "g");
-	while (get_line(g_cs[g_nb], &line))
-//	while ((i = read(g_cs[g_nb], line, 1024)) > 0)	
+	c_fd = g_cs[g_nb];
+	while (recv_line(c_fd, &line))
+//	while ((i = read(c_fd, line, 1024)) > 0)	
 	{
 //		line[i] = '\0';
-		if (!ft_strcmp(line, "quit"))
+		ft_debugstr("s_read_line", line); //debug
+		if (ft_strstr(line, "42zboubs"))
 			break ;
-		else if (ft_strstr(line, "ls") || !ft_strcmp(line, "pwd") || \
-				 ft_strstr(line, "cat") || ft_strstr(line, "chmod") || \
-				 ft_strstr(line, "cp") || ft_strstr(line, "mkdir") || \
-				 ft_strstr(line, "mv") || ft_strstr(line, "rm") || \
-				 ft_strstr(line, "sleep") || \
-				 ft_strstr(line, "cd") || !ft_strcmp(line, "whoami") ||
-				 ft_strstr(line, "get") || ft_strstr(line, "put"))
-			exec_cmd(line, e); //find better than strstr
+		else if (!ft_strncmp(line, "ls", 2) || !ft_strncmp(line, "pwd", 3) ||\
+				 !ft_strncmp(line, "cat", 3) || !ft_strncmp(line, "rm", 3) ||\
+				 !ft_strncmp(line, "cp", 2) || !ft_strncmp(line, "mkdir", 5) ||\
+				 !ft_strncmp(line, "mv", 2) || !ft_strncmp(line, "chmod", 5) ||\
+				 !ft_strncmp(line, "sleep", 5) ||!ft_strncmp(line, "cd", 2) ||\
+				 !ft_strncmp(line, "whoami", 6) || \
+				 !ft_strncmp(line, "get", 3) || !ft_strncmp(line, "put", 3))
+			exec_cmd(line, e, c_fd);
 		else if (ft_strlen(line) > 0)
 		{
 			ft_putstr("Client "), ft_putnbr(g_nb), ft_putstr(": ");
 			ft_putendl(line);
 			ft_putstr_clr("$Server> ", "g");
 		}
-		ft_memdel((void *)&line);
+//		ft_memdel((void *)&line);
 	}
-	ft_putendl_fd("quit", g_cs[g_nb]);
+	send_endl("42zboubs", c_fd);
 	ft_putstr("Bye "), ft_putnbr(g_nb), ft_putstr_clr("\n$Server> ", "g");
 }

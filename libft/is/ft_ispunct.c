@@ -6,7 +6,7 @@
 /*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 04:11:05 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:33:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/09 01:45:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 int ft_ispunct(int c)
 {
 	if (c != ' ' && !ft_isalnum(c) && ft_isprint(c))
-		return (1);
+		return (8);
 	return (0);
 }

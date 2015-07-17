@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/07 19:45:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/15 12:48:54 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define EXECV 12
 # define ENV 13
 # define OPEN 14
-# define DEBUG { ft_putstr_clr(__func__, "r"); ft_putstr_clr(" (", "r"); ft_putstr_clr(__FILE__, "red"); ft_putstr_clr(") - line: ", "r"); ft_putnbr_clr(__LINE__, "r"); ft_putendl(""); } //debug
+# define DEBUG { ft_putstr_clr(__func__, "r"); ft_putstr_clr(" (", "r"); ft_putstr_clr(__FILE__, "red"); ft_putstr_clr(") - line: ", "r"); ft_putnbr_clr(__LINE__, "r"); ft_putendl(""); } /*debug*/
 
 /*
 ** include
@@ -71,6 +71,9 @@ struct		s_env
 ** common prototypes
 */
 void		error(char error, char *msg);
+t_char		send_str(char const *str, int fd);
+t_char		send_endl(char const *str, int fd);
+t_char		recv_line(int const fd, char **line);
 
 /*
 ** client prototypes
@@ -85,12 +88,11 @@ void		client(char **av);
 */
 char		*get_env(char *var, t_env *e);
 char		ft_cd(char **av, t_env *e, int fd);
-void		exec_cmd(char *cmd, t_env *e);
-void		s_read_stdin(void);
+void		exec_cmd(char *cmd, t_env *e, int c_fd);
 void		s_read_client(t_env *e);
 void		s_sig_init(void);
 void		s_sig_handl(int sig);
-void		accept_sock(int sock, pid_t stdin_reader_pid, t_env *e);
+void		accept_sock(int sock, t_env *e);
 void		server(char **av, t_env *e);
 
 #endif

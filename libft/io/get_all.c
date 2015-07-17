@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 03:51:51 by mcanal            #+#    #+#             */
-/*   Updated: 2015/01/09 03:30:59 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/12 08:42:41 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int		get_all(int const fd, char **a)
 {
-	int		i;
+	ssize_t	i;
 	char	buf[BUFF_SIZE];
 
 	if (!a || fd < 0)
@@ -29,7 +29,8 @@ int		get_all(int const fd, char **a)
 	while ((i = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[i] = '\0';
-		*a = (char *)ft_realloc((void *)*a, ft_strlen(*a), ft_strlen(*a) + i);
+		*a = (char *)ft_realloc(\
+			(void *)*a, ft_strlen(*a), ft_strlen(*a) + (size_t)i);
 		ft_strcat(*a, buf);
 	}
 	if (!*a || i < 0)

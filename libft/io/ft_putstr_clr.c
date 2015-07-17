@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/26 23:19:06 by mcanal            #+#    #+#             */
-/*   Updated: 2015/01/09 03:31:29 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/14 23:45:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,26 @@
 */
 
 #include "libft.h"
+#include  <unistd.h>
 
-void	ft_putstr_clr(char const *s, char *clr)
+void	ft_putstr_clr(char *s, char *clr)
 {
-	while (*s)
-		ft_putchar_clr(*s++, clr);
+	if (*clr == 'r')
+		write(1, "\033[31;01m", 8);
+	else if (*clr == 'g')
+		write(1, "\033[32;01m", 8);
+	else if (*clr == 'y')
+		write(1, "\033[33;01m", 8);
+	else if (*clr == 'b')
+		write(1, "\033[34;01m", 8);
+	else if (*clr == 'p')
+		write(1, "\033[35;01m", 8);
+	else if (*clr == 's')
+		write(1, "\033[36;01m", 8);
+	else if (*clr == 'w')
+		write(1, "\033[37;01m", 8);
+	else
+		write(1, "\033[30;01m", 8);
+	write(1, s, ft_strlen(s));
+	write(1, "\033[0m", 4);
 }

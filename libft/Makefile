@@ -6,18 +6,24 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/15 21:30:59 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/14 23:27:52 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
-CFLAGS = -Wall -Wextra -Werror -I inc/
+I_DIR = -I inc/
 INC = inc/libft.h
-CC = gcc
+CC = clang
 AR = ar rc
-RM = rm -f
-VPATH = edit/lst1:edit/lst2:io:is:lst1:lst2:mem:str
+RM = rm -rf
+MKDIR = mkdir -p
 O_DIR = obj
+VPATH = 	edit/lst1:edit/lst2:io:is:lst1:lst2:mem:str
+CFLAGS =	-Wall -Wextra -Werror -Wpedantic -Wshadow -Wcast-qual -Wcast-align \
+			-Wconversion -Wstrict-prototypes -Wmissing-prototypes \
+			-Wmissing-declarations -Wnonnull -Wuninitialized -Wfloat-equal \
+			-Wbad-function-cast -Wundef -Wstrict-overflow=5 -Waggregate-return \
+			-Wunreachable-code -Winit-self -O2
 C_EDIT1 =	ft_lstnew.c			ft_lstmap.c			ft_lstdelone.c		\
 			ft_lstfind.c
 C_EDIT2 =	ft_lnew.c			ft_lfree.c 			ft_lfind.c
@@ -27,7 +33,8 @@ C_IO =		ft_putchar.c		ft_putnbr.c			ft_putstr.c			\
 			ft_putstr_clr.c		ft_putchar_clr.c	ft_putendl_clr.c	\
 			ft_debugstr.c		ft_debugnbr.c		ft_putnbr_clr.c		\
 			get_line.c			fail.c				failn.c				\
-			ft_putnbr_fd.c
+			ft_putnbr_fd.c		ft_putdbl.c			ft_putdbl_fd.c		\
+			ft_putdbl_clr.c		ft_debugdbl.c
 C_IS =		ft_isalnum.c		ft_isalpha.c		ft_isxdigit.c		\
 			ft_isascii.c		ft_isdigit.c		ft_isprint.c		\
 			ft_islower.c		ft_isupper.c		ft_isblank.c		\
@@ -63,25 +70,47 @@ SRCC =	$(C_EDIT1:%.c=edit/lst1/%.c)		$(C_EDIT2:%.c=edit/lst2/%.c)\
 		$(C_IO:%.c=io/%.c)					$(C_IS:%.c=is/%.c)			\
 		$(C_LST1:%.c=lst1/%.c)				$(C_LST2:%.c=lst2/%.c)		\
 		$(C_MEM:%.c=mem/%.c)				$(C_STR:%.c=str/%.c)
-SRCO =	$(C_EDIT1:%.c=$(O_DIR)/%.o)			$(C_EDIT2:%.c=$(O_DIR)/%.o)	\
+OBJS =	$(C_EDIT1:%.c=$(O_DIR)/%.o)			$(C_EDIT2:%.c=$(O_DIR)/%.o)	\
 		$(C_IO:%.c=$(O_DIR)/%.o)			$(C_IS:%.c=$(O_DIR)/%.o)	\
 		$(C_LST1:%.c=$(O_DIR)/%.o)			$(C_LST2:%.c=$(O_DIR)/%.o)	\
 		$(C_MEM:%.c=$(O_DIR)/%.o)			$(C_STR:%.c=$(O_DIR)/%.o)
+DEPS =  $(OBJS:%.o=%.d)
+
+WHITE = \033[37;01m
+RED = \033[31;01m
+GREEN =  \033[32;01m
+BLUE =  \033[34;01m
+BASIC = \033[0m
 
 .PHONY: all clean fclean re
 
 all:
 	@$(MAKE) $(NAME)
 
-$(NAME): $(SRCO) $(INC)
-	@$(AR) $(NAME) $(SRCO)
-	@ranlib $(NAME) || $(RM) $(NAME)
+debug: CFLAGS = -g -O2
+debug: fclean $(NAME)
+
+-include $(DEPS)
+
+$(NAME): $(OBJS) $(INC)
+	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@ $(BASIC)"
+	@$(AR) $(NAME) $(OBJS)
+	@echo "$(WHITE)ranlib $(RED)$@"
+	@ranlib $(NAME)
+	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
+	@echo "$(WHITE)compi:$(BASIC) $(CC)"
 
 $(O_DIR)/%.o: %.c
-	@$(CC) -c $(CFLAGS) $^ -o $@ || $(RM) $(NAME)
+	@echo "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
+	@$(CC) $(CFLAGS) $(I_DIR) -MMD -c $< -o $@
+
+$(OBJS): | $(O_DIR)
+
+$(O_DIR):
+	@$(MKDIR) $(O_DIR)
 
 clean:
-	@$(RM) $(SRCO)
+	@$(RM) $(O_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)

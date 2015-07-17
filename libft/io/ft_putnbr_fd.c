@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 17:02:47 by mcanal            #+#    #+#             */
-/*   Updated: 2014/12/14 20:16:48 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/12 08:46:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n % 10, fd);
 	}
 	else
-		ft_putchar_fd(n + 48, fd);
+		ft_putchar_fd((char)n + '0', fd);
 }

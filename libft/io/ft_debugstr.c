@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/26 23:24:49 by mcanal            #+#    #+#             */
-/*   Updated: 2014/12/27 01:30:37 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/14 23:12:28 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 */
 
 #include "libft.h"
+#include  <unistd.h>
 
 void	ft_debugstr(char *name, char *str)
 {
-	ft_putchar_clr('<', "r");
-	ft_putstr_clr(name, "r");
-	ft_putstr_clr(":", "r");
-	ft_putstr_clr(str, "g");
-	ft_putendl_clr(">", "r");
+	write(1, "\033[31;01m<", 9);
+	write(1, name, ft_strlen(name));
+	write(1, ":\033[32;01m", 9);
+	write(1, str, ft_strlen(str));
+	write(1, "\033[31;01m>\033[0m\n", 14);
 }

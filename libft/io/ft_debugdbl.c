@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_debugdbl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 14:23:09 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 01:41:42 by mcanal           ###   ########.fr       */
+/*   Created: 2014/12/26 23:24:49 by mcanal            #+#    #+#             */
+/*   Updated: 2015/07/14 23:23:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** checks for an alphanumeric character; it is equivalent to
-** (isalpha(c) || isdigit(c)).
+** Allows to print a double variable preceded by its name (debug!)
 */
 
 #include "libft.h"
 
-int		ft_isalnum(int i)
+void	ft_debugdbl(char *name, double nbr)
 {
-	if (ft_isalpha(i) || ft_isdigit(i))
-		return (8);
-	return (0);
+	ft_putchar_clr('<', "r");
+	ft_putstr_clr(name, "r");
+	ft_putstr_clr(":", "r");
+	ft_putdbl_clr(nbr, "g");
+	ft_putendl_clr(">", "r");
 }

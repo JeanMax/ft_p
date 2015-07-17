@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/07 19:44:26 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/17 13:23:29 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,46 +18,53 @@
 
 #include "header.h"
 
-extern int		g_cs[MAX_CLIENTS];
 extern int		g_nb;
 /*
 //send file to client
 static void		get_file(char *name)
 {
-	int		file_fd;
-	char	*all;
-	
-	if ((file_fd = open(name, O_RDONLY)) < 0)
-		error(OPEN, name);
-	get_all(file_fd, &all);
-	ft_putstr_fd(all, g_cs[g_nb]);
-	close(file_fd);
-	ft_memdel((void *)&all);
-}
+int		file_fd;
+char	*all;
 
-//write client to file
-static void		put_file(char *name, char *all)
-{
-	int		file_fd;
-	
-	if ((file_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
-		error(OPEN, name);
-	ft_putstr_fd(all, file_fd);
-	close(file_fd);
+if ((file_fd = open(name, O_RDONLY)) < 0)
+error(OPEN, name);
+get_all(file_fd, &all);
+send_str(all, g_cs[g_nb]);
+close(file_fd);
+ft_memdel((void *)&all);
 }
 */
-char    *get_env(char *var, t_env *e)
+
+ //write client to file
+static void		s_put(int c_fd)
 {
-	char    **ae;
-	int     i;
-	int     len;
+//	int		file_fd;
+	char	line[1024];
+	int		i;
+
+	while ((i = (int)read(c_fd, line, 1024)) > 0)
+	{
+		line[i] = '\0';
+		ft_debugstr("line", line); //debug
+//		if ((file_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
+//			error(OPEN, name);
+//		send_str(all, file_fd);
+//		close(file_fd);
+	}
+}
+
+char		*get_env(char *var, t_env *e)
+{
+	char		**ae;
+	int			 i;
+	size_t		 len;
 
 	ae = e->ae;
 	i = 0;
 	len = ft_strlen(var);
 	while (ae[i] && ft_strncmp(ae[i], var,
 							   (int)ft_strlen(var) > ft_strindex(ae[i], '=') ?
-							   (int)ft_strlen(var) : ft_strindex(ae[i], '=')))
+							   ft_strlen(var) : (size_t)ft_strindex(ae[i], '=')))
 		i++;
 	return (ae[i] ? ft_strdup(ae[i] + len + 1) : ft_strnew(1));
 }
@@ -65,7 +72,7 @@ char    *get_env(char *var, t_env *e)
 static void		check_cmd(char **cmd, t_env *e)
 {
 	int		i;
-	//char    *tmp;
+	//char	*tmp;
 
 	i = -1;
 	while (cmd[++i])
@@ -125,54 +132,52 @@ static char		**permission_granted(char *cmd, t_env *e) //TODO
 	return (cmd_tab);
 }
 
-static void		exec_it(char *cmd, t_env *e)
+static void		exec_it(char *cmd, t_env *e, int c_fd)
 {
 	char	**cmd_tab;
 	char	*tmp;
-	int		save_fd[3];
+	pid_t	pid;
 
-	save_fd[1] = 1;
 	if ((cmd_tab = split_that(cmd)))
 	{
 		check_cmd(cmd_tab, e);
 		tmp = ft_strjoin("/bin/", cmd_tab[0]);
-		if ((save_fd[0] = (int)fork()) < 0)
-			error(FORK, ft_itoa(save_fd[0]));
-		else if (!save_fd[0]) //son... zombie shotgun enough?
+		send_endl("SUCCESS", c_fd); //wtf
+		if ((pid = (int)fork()) < 0)
+			error(FORK, ft_itoa(pid));
+		else if (!pid) //son... zombie shotgun enough?
 		{
-			dup2(1, save_fd[1]), dup2(2, save_fd[0]);
-			dup2(g_cs[g_nb], 1), dup2(g_cs[g_nb], 2);
-			save_fd[2] = execv(tmp, cmd_tab) == -1 ? FALSE : TRUE;
-			dup2(save_fd[1], 1), dup2(save_fd[0], 1);
-			close(save_fd[1]), close(save_fd[0]);
-// the best would be to check if stderr is filled with something,
-			//-> if so print ERROR, else SUCCESS
-			wait(NULL);
+			dup2(c_fd, 1), dup2(c_fd, 2);
+			execv(tmp, cmd_tab); //check return?
 		}
 		else
-		{
-			ft_freestab(cmd_tab);
-//		ft_memdel((void *)tmp); LEAK...
-			ft_putendl_fd(save_fd[2] ? "SUCCESSS" : "ERRORR", g_cs[g_nb]);
-		}
+			wait(NULL);
+		send_str("promptzboub", c_fd);
+		ft_freestab(cmd_tab);
+//		ft_memdel((void *)tmp); //LEAK...
 	}
 }
 
-void			exec_cmd(char *cmd, t_env *e)
+void			exec_cmd(char *cmd, t_env *e, int c_fd)
 {
 	char	**cmd_tab;
 
 	if (!ft_strcmp(cmd, "whoami"))
 	{
-		ft_putstr_fd("You are the client number ", g_cs[g_nb]);
-		ft_putnbr_fd(g_nb, g_cs[g_nb]);
-		ft_putendl_fd(".", g_cs[g_nb]);
+		send_endl("SUCCESS", c_fd);
+		send_str("You are the client number ", c_fd);
+		ft_putnbr_fd(g_nb, c_fd);
+		send_endl(".", c_fd);
+		send_str("promptzboub", c_fd);
 	}
+	else if (!ft_strcmp(cmd, "put"))
+		s_put(c_fd);
 	else if (!ft_strstr(cmd, "cd"))
-		exec_it(cmd, e);
+		exec_it(cmd, e, c_fd);
 	else if ((cmd_tab = permission_granted(cmd, e)))
 	{
-		ft_cd(cmd_tab, e, g_cs[g_nb]) ? ft_putendl_fd("SUCCESS", g_cs[g_nb]) : 0;
+		ft_cd(cmd_tab, e, c_fd) ? send_endl("SUCCESS", c_fd) : 0;
 		ft_freestab(cmd_tab);
+		send_str("promptzboub", c_fd);
 	}
 }

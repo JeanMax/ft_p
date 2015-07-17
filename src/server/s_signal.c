@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:34:21 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 09:55:18 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/17 13:22:59 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@
 extern int		g_cs[MAX_CLIENTS];
 extern int		g_nb;
 
-void			s_sig_handl(int sig)
+void			s_sig_handl(int i)
 {
-	if (sig == SIGBUS)
+	if (i == SIGBUS)
 		error(BUS, NULL);
-	else if (sig == SIGSEGV)
+	else if (i == SIGSEGV)
 		error(SEG, NULL);
-	else if (sig == SIGFPE)
+	else if (i == SIGFPE)
 		error (FPE, NULL);
-	else if (sig == SIGINT)
+	else if (i == SIGINT)
 	{
 		ft_putstr("\b \b\b \bquit");
-		sig = 0;
-		while (sig <= g_nb)
-			g_cs[sig] > 0 ? ft_putendl_fd("quit", g_cs[sig]) : NULL, sig++;
+		i = 0;
+		while (i <= g_nb)
+			g_cs[i] > 0 ? send_endl("42zboubs", g_cs[i]) : 0, i++;
 		exit(0);
 	}
-	else if (sig == 29)
+	else if (i == 29)
 		ft_putstr_clr("$Server> ", "g");
 }
 

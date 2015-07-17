@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 14:24:25 by mcanal            #+#    #+#             */
-/*   Updated: 2014/12/14 20:14:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/09 00:55:22 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_memalloc(size_t size)
 
 	if (!size)
 		size = 1;
-	ptr = (void *)malloc(sizeof(*ptr) * size);
+	ptr = (void *)malloc(sizeof(void *) * size);
 	if (!ptr)
 		return (NULL);
 	ft_bzero(ptr, size);

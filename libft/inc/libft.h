@@ -6,14 +6,14 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 07:48:59 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/14 23:44:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
-# define BUFF_SIZE 512
+# define BUFF_SIZE 8
 
 # include <string.h>
 # include "edit.h"
@@ -27,18 +27,22 @@ void	ft_putchar(char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl(char const *s);
 void	ft_putendl_fd(char const *s, int fd);
-void	*fail(char *s);
-void	*failn(char *s);
+void	*fail(char const *s);
+void	*failn(char const *s);
+void	ft_putdbl(double nbr);
+void	ft_putdbl_fd(double nbr, int fd);
 void	ft_putnbr(int nbr);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr(char const *s);
 void	ft_putstr_fd(char const *s, int fd);
+void	ft_putdbl_clr(double nbr, char *clr);
 void	ft_putnbr_clr(int nbr, char *clr);
-void	ft_putstr_clr(char const *s, char *clr);
-void	ft_putendl_clr(char const *s, char *clr);
+void	ft_putstr_clr(char *s, char *clr);
+void	ft_putendl_clr(char *s, char *clr);
 void	ft_putchar_clr(char c, char *clr);
 void	ft_debugstr(char *name, char *str);
 void	ft_debugnbr(char *name, int nbr);
+void	ft_debugdbl(char *name, double nbr);
 int		get_all(int const fd, char **a);
 int		get_next_line(int const fd, char **line);
 int		get_line(int const fd, char **a);

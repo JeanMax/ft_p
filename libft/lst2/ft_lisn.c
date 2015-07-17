@@ -6,7 +6,7 @@
 /*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 23:47:29 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/22 14:26:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/12 08:53:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int ft_lisn(t_lst **alst, t_lst *lst)
 {
 	t_lst	*tmp;
-	size_t	i;
+	int		i;
 
 	if (!alst || !lst)
 		return (0);

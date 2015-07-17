@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:39:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 04:41:31 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/03/09 15:37:55 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void			c_sig_init(void)
 	signal(SIGBUS, c_sig_handl);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN); //testing! zombie shotgun
 }

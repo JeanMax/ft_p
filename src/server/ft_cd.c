@@ -27,8 +27,8 @@ static char		go_to(char *path, t_env *e, int fd)
 		tmp2 = ft_strjoin(tmp1, path);
 		if (chdir(tmp2))
 		{
-			ft_putstr_fd("ERROR: cd: no such file or directory: ", fd);
-			ft_putendl_fd(tmp2, fd);
+			send_str("ERROR: cd: no such file or directory: ", fd);
+			send_endl(tmp2, fd);
 			ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
 			return (FALSE);
 		}
@@ -36,8 +36,8 @@ static char		go_to(char *path, t_env *e, int fd)
 	}
 	else if (chdir(path))
 	{
-		ft_putstr_fd("ERROR: cd: no such file or directory: ", fd);
-		ft_putendl_fd(path, fd);
+		send_str("ERROR: cd: no such file or directory: ", fd);
+		send_endl(path, fd);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -54,7 +54,7 @@ char			ft_cd(char **av, t_env *e, int fd)
 		ac++;
 	if (ac > 2)
 	{
-		ft_putendl_fd("ERROR: cd: Too many arguments.", fd);
+		send_endl("ERROR: cd: Too many arguments.", fd);
 		return (FALSE);
 	}
 	else if (ac == 1)

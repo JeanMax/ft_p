@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_main.c                                           :+:      :+:    :+:   */
+/*   ft_putdbl_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 01:58:56 by mcanal           ###   ########.fr       */
+/*   Created: 2015/02/18 05:46:14 by mcanal            #+#    #+#             */
+/*   Updated: 2015/02/18 06:25:25 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** this is the client's main!
+** print a double on specied file descriptor
 */
 
-#include "header.h"
+#include "libft.h"
 
-int					main(int ac, char **av)
+void			ft_putdbl_fd(double nbr, int fd)
 {
-	if (ac != 3)
-		error(C_USAGE, av[0]);
-	client(av);
-	return (0);
+	int			i;
+
+	ft_putnbr_fd((int)nbr, fd);
+	ft_putchar_fd('.', fd);
+	nbr -= (int)nbr;
+	nbr *= 10000000;
+	i = 1;
+	while (nbr >= 10000000)
+	{
+		i *= 10;
+		nbr /= 10;
+	}
+	ft_putnbr_fd((int)nbr % (10000000 / i), fd);
 }

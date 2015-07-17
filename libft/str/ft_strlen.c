@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:21:34 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:16:01 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/14 14:04:34 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 size_t	ft_strlen(const char *str)
 {
-	int i;
+	size_t	i;
 
 	if (!str)
 		return (0);
 	i = 0;
-	while (str[i])
-		i++;
+	while (*str)
+		str++, i++;
 	return (i);
 }

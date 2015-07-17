@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 16:39:42 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/12 16:24:43 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/12 09:06:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*str;
-	size_t	i;
+	char			*str;
+	unsigned int	i;
 
 	if (!s || !f)
 		return (0);

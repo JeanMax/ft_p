@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:07:11 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/28 19:58:15 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/12 08:43:13 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "libft.h"
 #include <unistd.h>
 
-int		is_there_line(char *left, char **line)
+static int		is_there_line(char *left, char **line)
 {
 	char	*end;
 
@@ -35,9 +35,9 @@ int		is_there_line(char *left, char **line)
 	return (0);
 }
 
-int		get_next_line(int const fd, char **line)
+int				get_next_line(int const fd, char **line)
 {
-	int				ret;
+	ssize_t			ret;
 	char			buf[BUFF_SIZE + 1];
 	static char		*left;
 
