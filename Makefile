@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/15 12:44:32 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/21 14:15:50 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,8 +14,8 @@ C_NAME = Client
 S_NAME = Server
 
 C_SRC = c_main.c c_read.c c_signal.c client.c
-S_SRC =	s_main.c s_read.c s_signal.c s_exec.c ft_cd.c server.c
-SHARED_SRC = error.c send_recv.c
+S_SRC =	s_main.c s_read.c s_signal.c server.c ft_cd.c s_exec.c whoami.c get_env.c
+SHARED_SRC = error.c send_recv.c is_cmd.c
 
 C_DIR = src/client
 S_DIR = src/server
@@ -35,7 +35,7 @@ DEPS =  $(OBJS:%.o=%.d)
 
 LIB = libft/libft.a
 I_DIR = -I inc/
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O2
 CC = clang
 RM = rm -rf
 MKDIR = mkdir -p
@@ -46,7 +46,7 @@ GREEN =  \033[32;01m
 BLUE =  \033[34;01m
 BASIC = \033[0m
 
-.PHONY: all debug debug_lib me_cry client server clean fclean zclean re brute
+.PHONY: all debug debug_lib leaks debug_leaks me_cry client server clean fclean zclean re brute
 
 all:
 	@$(MAKE) -C libft
@@ -57,33 +57,40 @@ debug_lib:
 	@$(MAKE) -C libft debug
 	@$(MAKE) debug
 
-debug: CFLAGS = -g 
+debug: CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined #-fsanitize=leak
 debug: fclean $(C_NAME) $(S_NAME)
+
+leaks:
+	@$(MAKE) -C libft leaks
+	@$(MAKE) debug_leaks
+
+debug_leaks: CFLAGS = -g -ggdb -O2 -fsanitize=leak
+debug_leaks: fclean $(C_NAME) $(S_NAME)
 
 me_cry: CFLAGS += -Wpedantic -Wshadow -Wcast-qual -Wconversion -Wcast-align \
 				  -Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code \
 				  -Winit-self -Wmissing-declarations -Wnonnull -Wuninitialized \
 				  -Wfloat-equal -Wbad-function-cast -Wundef -Waggregate-return \
-				  -Wstrict-overflow=5 -O2
+				  -Wstrict-overflow=5
 me_cry: $(C_NAME) $(S_NAME)
 
 -include $(DEPS)
 
 $(S_NAME): $(S_SRCO) $(LIB)
+	@$(CC) $(CFLAGS) $(I_DIR) $(S_SRCO) $(LIB) -o $@
 	@echo "$(BLUE)$(S_SRCO) $(WHITE)->$(RED) $@ $(BASIC)"
 	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
 	@echo "$(WHITE)compi:$(BASIC) $(CC)"
-	@$(CC) $(CFLAGS) $(I_DIR) $(S_SRCO) $(LIB) -o $@
 
 $(C_NAME): $(C_SRCO) $(LIB)
+	@$(CC) $(CFLAGS) $(I_DIR) $(C_SRCO) $(LIB) -o $@
 	@echo "$(BLUE)$(C_SRCO) $(WHITE)->$(RED) $@ $(BASIC)"
 	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
 	@echo "$(WHITE)compi:$(BASIC) $(CC)"
-	@$(CC) $(CFLAGS) $(I_DIR) $(C_SRCO) $(LIB) -o $@
 
 $(O_DIR)/%.o: %.c
-	@echo "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
 	@$(CC) $(CFLAGS) $(I_DIR) -MMD -c $< -o $@
+	@echo "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
 
 $(OBJS): | $(O_DIR)
 

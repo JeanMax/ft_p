@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:08 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 15:46:32 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/20 22:59:51 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void					client(char **av)
 	ft_putstr_clr("$Client> ", "g");
 	if ((pid = fork()) < 0)
 		error(FORK, ft_itoa((int)pid));
-	else if (pid) //father
-		c_read_server(sock);
-	else //son
+	else if (pid)
 		c_read_stdin(sock);
+	else
+		c_read_server(sock);
 }

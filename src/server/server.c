@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/13 21:17:49 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/20 20:18:12 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,22 @@ void			accept_sock(int sock, t_env *e)
 	struct sockaddr_in	csin;
 	pid_t				pid;
 
-	g_nb++;
-	if (!g_nb)
-		ft_putstr_clr("$Server> ", "g"), ft_putendl("Waiting for connexion...");
-	if ((g_cs[g_nb] = accept(sock, (struct sockaddr *)&csin, &cslen)) == -1)
-		error(ACCEPT, ft_itoa(sock));
-	if ((pid = fork()) < 0)
-		error(FORK, ft_itoa((int)pid));
-	else if (pid) //father
-		accept_sock(sock, e);
-	else //son
-		s_read_client(e);
+	while (1)
+	{
+		g_nb++;
+		if (!g_nb)
+		{
+			ft_putstr_clr("$Server> ", "g");
+			ft_putendl("Waiting for connexion...");
+		}
+		if ((g_cs[g_nb] = accept(sock, (struct sockaddr *)&csin, &cslen)) == -1)
+			error(ACCEPT, ft_itoa(sock));
+		if ((pid = fork()) < 0)
+			error(FORK, ft_itoa((int)pid));
+		else if (pid)
+			s_read_client(e);
+		//else : keep going!
+	}
 }
 
 void				server(char **av, t_env *e)

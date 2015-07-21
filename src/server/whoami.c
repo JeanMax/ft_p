@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freestab.c                                      :+:      :+:    :+:   */
+/*   whoami.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/15 03:58:41 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 20:06:45 by mcanal           ###   ########.fr       */
+/*   Created: 2015/07/20 23:40:46 by mcanal            #+#    #+#             */
+/*   Updated: 2015/07/21 01:18:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** Free a char * tab
-*/
+#include "header.h"
 
-#include "libft.h"
+extern int      g_nb;
 
-void	ft_freestab(char **tab)
+void		whoami(int c_fd)
 {
-	char	**swap;
+	char	*tmp;
 
-	swap = tab;
-	while (*tab)
-		ft_memdel((void *)(tab++));
-	ft_memdel((void *)&swap);
+	tmp = ft_itoa(g_nb);
+	send_str("SUCCESS.\nYou are the client number ", c_fd);
+	send_str(tmp, c_fd);
+	send_endl(".", c_fd);
+	ft_memdel((void *)&tmp);
 }

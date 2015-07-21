@@ -6,68 +6,18 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/17 13:23:29 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/21 20:14:34 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** handling execution of basics commands (ls, pwd, cd, whoami)
 ** quit is already handled in the s_read_client function
-** TODO: get/put commands
 */
 
 #include "header.h"
 
 extern int		g_nb;
-/*
-//send file to client
-static void		get_file(char *name)
-{
-int		file_fd;
-char	*all;
-
-if ((file_fd = open(name, O_RDONLY)) < 0)
-error(OPEN, name);
-get_all(file_fd, &all);
-send_str(all, g_cs[g_nb]);
-close(file_fd);
-ft_memdel((void *)&all);
-}
-*/
-
- //write client to file
-static void		s_put(int c_fd)
-{
-//	int		file_fd;
-	char	line[1024];
-	int		i;
-
-	while ((i = (int)read(c_fd, line, 1024)) > 0)
-	{
-		line[i] = '\0';
-		ft_debugstr("line", line); //debug
-//		if ((file_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
-//			error(OPEN, name);
-//		send_str(all, file_fd);
-//		close(file_fd);
-	}
-}
-
-char		*get_env(char *var, t_env *e)
-{
-	char		**ae;
-	int			 i;
-	size_t		 len;
-
-	ae = e->ae;
-	i = 0;
-	len = ft_strlen(var);
-	while (ae[i] && ft_strncmp(ae[i], var,
-							   (int)ft_strlen(var) > ft_strindex(ae[i], '=') ?
-							   ft_strlen(var) : (size_t)ft_strindex(ae[i], '=')))
-		i++;
-	return (ae[i] ? ft_strdup(ae[i] + len + 1) : ft_strnew(1));
-}
 
 static void		check_cmd(char **cmd, t_env *e)
 {
@@ -137,25 +87,35 @@ static void		exec_it(char *cmd, t_env *e, int c_fd)
 	char	**cmd_tab;
 	char	*tmp;
 	pid_t	pid;
+	int		out;
+	int		err;
 
-	if ((cmd_tab = split_that(cmd)))
+	if (!(cmd_tab = split_that(cmd)))
+		return ;
+	check_cmd(cmd_tab, e);
+	tmp = ft_strjoin("/bin/", cmd_tab[0]); //leak
+	if ((out = open("/tmp/1", O_RDWR | O_CREAT | O_TRUNC, 0664)) < 0)
+		error(OPEN, "1");
+	if ((err = open("/tmp/2", O_RDWR | O_CREAT | O_TRUNC, 0664)) < 0)
+		error(OPEN, "2");
+	if ((pid = (int)fork()) < 0)
+		error(FORK, ft_itoa(pid));
+	else if (!pid)
 	{
-		check_cmd(cmd_tab, e);
-		tmp = ft_strjoin("/bin/", cmd_tab[0]);
-		send_endl("SUCCESS", c_fd); //wtf
-		if ((pid = (int)fork()) < 0)
-			error(FORK, ft_itoa(pid));
-		else if (!pid) //son... zombie shotgun enough?
-		{
-			dup2(c_fd, 1), dup2(c_fd, 2);
-			execv(tmp, cmd_tab); //check return?
-		}
-		else
-			wait(NULL);
-		send_str("promptzboub", c_fd);
-		ft_freestab(cmd_tab);
-//		ft_memdel((void *)tmp); //LEAK...
+		dup2(out, 1), dup2(err, 2), execv(tmp, cmd_tab);
+		error(EXECV, tmp); exit(-1);
 	}
+	else
+		waitpid(pid, NULL, 0); //...
+	close(out), close(err);
+	if ((out = open("/tmp/1", O_RDONLY)) < 0)
+		error(OPEN, "1");
+	if ((err = open("/tmp/2", O_RDONLY)) < 0)
+		error(OPEN, "2");
+	get_all(out, &tmp), send_str(tmp, c_fd); //leak
+	get_all(err, &tmp), send_str(tmp, c_fd); //leak
+	close(out), close(err), ft_freestab(cmd_tab);
+	send_endl(ft_strlen(tmp) ? "ERROR" : "SUCCESS", c_fd);
 }
 
 void			exec_cmd(char *cmd, t_env *e, int c_fd)
@@ -163,21 +123,17 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 	char	**cmd_tab;
 
 	if (!ft_strcmp(cmd, "whoami"))
-	{
-		send_endl("SUCCESS", c_fd);
-		send_str("You are the client number ", c_fd);
-		ft_putnbr_fd(g_nb, c_fd);
-		send_endl(".", c_fd);
-		send_str("promptzboub", c_fd);
-	}
-	else if (!ft_strcmp(cmd, "put"))
-		s_put(c_fd);
+		whoami(c_fd);
+	else if (!ft_strncmp(cmd, "put", 3))
+		send_str(cmd, c_fd), recv_file(cmd, c_fd);
+	else if (!ft_strncmp(cmd, "get", 3))
+		send_str(cmd, c_fd), send_file(cmd, c_fd);
 	else if (!ft_strstr(cmd, "cd"))
 		exec_it(cmd, e, c_fd);
 	else if ((cmd_tab = permission_granted(cmd, e)))
 	{
 		ft_cd(cmd_tab, e, c_fd) ? send_endl("SUCCESS", c_fd) : 0;
 		ft_freestab(cmd_tab);
-		send_str("promptzboub", c_fd);
 	}
+	send_str("prompt", c_fd);
 }

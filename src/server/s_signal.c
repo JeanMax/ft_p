@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:34:21 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/17 13:22:59 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/20 22:32:29 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void			s_sig_handl(int i)
 		error (FPE, NULL);
 	else if (i == SIGINT)
 	{
-		ft_putstr("\b \b\b \bquit");
 		i = 0;
-		while (i <= g_nb)
-			g_cs[i] > 0 ? send_endl("42zboubs", g_cs[i]) : 0, i++;
+        while (i <= g_nb)
+            g_cs[i] > 0 ? send_str("quit", g_cs[i]) : 0, i++;
 		exit(0);
 	}
 	else if (i == 29)
@@ -41,6 +40,7 @@ void			s_sig_handl(int i)
 
 void			s_sig_init(void)
 {
+	signal(SIGINT, s_sig_handl);
 	signal(SIGFPE, s_sig_handl);
 	signal(29, s_sig_handl);
 	signal(SIGSEGV, s_sig_handl);

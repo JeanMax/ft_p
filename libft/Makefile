@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/14 23:27:52 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/20 19:51:49 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -82,13 +82,16 @@ GREEN =  \033[32;01m
 BLUE =  \033[34;01m
 BASIC = \033[0m
 
-.PHONY: all clean fclean re
+.PHONY: all debug leaks clean fclean re
 
 all:
 	@$(MAKE) $(NAME)
 
-debug: CFLAGS = -g -O2
+debug: CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined
 debug: fclean $(NAME)
+
+leaks: CFLAGS = -g -ggdb -O2 -fsanitize=leak
+leaks: fclean $(NAME)
 
 -include $(DEPS)
 

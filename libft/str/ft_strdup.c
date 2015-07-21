@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:11:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/11 01:32:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/21 19:14:59 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,16 @@
 
 char *ft_strdup(char *src)
 {
-	unsigned int		i;
-	char				*dup;
+	char			*dup;
+	char			*swap;
 
-	i = 0;
 	if (!src)
 		return (NULL);
-	while (src[i])
-		i++;
-	dup = (char *)malloc(sizeof(char) * (i + 1));
-	if (!dup)
+	if (!(dup = (char *)malloc(sizeof(char) * (ft_strlen(src) + 1))))
 		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dup[i] = src[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	swap = dup;
+	while (*src)
+		*(dup++) = *(src++);
+	*dup = 0;
+	return (swap);
 }

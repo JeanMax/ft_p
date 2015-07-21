@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 03:51:51 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/12 08:42:41 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/21 01:53:17 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int		get_all(int const fd, char **a)
 {
 	ssize_t	i;
-	char	buf[BUFF_SIZE];
+	char	buf[BUFF_SIZE + 1];
 
 	if (!a || fd < 0)
 		return (0);

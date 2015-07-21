@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/15 12:48:54 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/21 15:45:25 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <signal.h>
 # include <fcntl.h>
 
@@ -71,9 +73,12 @@ struct		s_env
 ** common prototypes
 */
 void		error(char error, char *msg);
+t_char		is_cmd(char *line);
 t_char		send_str(char const *str, int fd);
 t_char		send_endl(char const *str, int fd);
-t_char		recv_line(int const fd, char **line);
+size_t		recv_msg(int const fd, char **line);
+t_char		send_file(char *file, int fd);
+t_char		recv_file(char *file, int fd);
 
 /*
 ** client prototypes
@@ -88,6 +93,7 @@ void		client(char **av);
 */
 char		*get_env(char *var, t_env *e);
 char		ft_cd(char **av, t_env *e, int fd);
+void		whoami(int c_fd);
 void		exec_cmd(char *cmd, t_env *e, int c_fd);
 void		s_read_client(t_env *e);
 void		s_sig_init(void);

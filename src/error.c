@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 19:39:48 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/13 08:18:36 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/21 15:53:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void		error(char error, char *msg) //free itoa? //do not exit everytime
 		failn("Environment not found.");
 	else if (error == OPEN)
 		fail("Open failed with file: "), failn(msg);
-	exit(-1);
+	error != OPEN ? exit(-1) : (void)0;
 }
