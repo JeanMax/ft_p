@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 15:45:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 13:44:55 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,10 @@
 ** define
 */
 # define HEADER_H
-# define TRUE 1
-# define FALSE 0
-# define MAX_CLIENTS 1024
-# define PATH_SIZE 256
-# define S_USAGE_MSG " <port> [minimum folder]"
-# define C_USAGE_MSG " <adrr> <port>"
-# define S_USAGE 0
-# define C_USAGE 1
-# define MALLOC 2
-# define PROTO 3
-# define BIND 4
-# define ACCEPT 5
-# define CONNECT 6
-# define FORK 7
-# define BUS 8
-# define SEG 9
-# define FPE 10
-# define KILL 11
-# define EXECV 12
-# define ENV 13
-# define OPEN 14
-# define DEBUG { ft_putstr_clr(__func__, "r"); ft_putstr_clr(" (", "r"); ft_putstr_clr(__FILE__, "red"); ft_putstr_clr(") - line: ", "r"); ft_putnbr_clr(__LINE__, "r"); ft_putendl(""); } /*debug*/
+# define MAX_CLIENTS	1024
+# define PATH_SIZE		256
+# define S_USAGE_MSG	" <port> [minimum folder]"
+# define C_USAGE_MSG	" <adrr> <port>"
 
 /*
 ** include
@@ -57,6 +39,29 @@
 # include <fcntl.h>
 
 /*
+** enum
+*/
+enum	e_error
+{
+	S_USAGE,
+	C_USAGE,
+	MALLOC,
+	PROTO,
+	BIND,
+	ACCEPT,
+	CONNECT,
+	FORK,
+	BUS,
+	SEG,
+	FPE,
+	KILL,
+	EXECV,
+	ENV,
+	OPEN,
+	PATH
+};
+
+/*
 ** struct && typedef
 */
 typedef struct s_env	t_env;
@@ -65,7 +70,7 @@ struct		s_env
 	char	*old_pwd;
 	char	*pwd;
 	char	*home;
-	char	*stop;
+	char	*path;
 	char	**ae;
 };
 
@@ -91,9 +96,11 @@ void		client(char **av);
 /*
 ** server prototypes
 */
+void		fill_env(char **ae, t_env *e, char *stop);
 char		*get_env(char *var, t_env *e);
 char		ft_cd(char **av, t_env *e, int fd);
 void		whoami(int c_fd);
+char		**permission_granted(char *cmd, t_env *e);
 void		exec_cmd(char *cmd, t_env *e, int c_fd);
 void		s_read_client(t_env *e);
 void		s_sig_init(void);

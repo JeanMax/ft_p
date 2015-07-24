@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/20 20:18:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/23 15:18:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ static int				create_server(int port)
 
 void			accept_sock(int sock, t_env *e)
 {
-	unsigned int		cslen;
+	socklen_t			cslen;
 	struct sockaddr_in	csin;
 	pid_t				pid;
 
+	cslen = sizeof(csin);
 	while (1)
 	{
 		g_nb++;

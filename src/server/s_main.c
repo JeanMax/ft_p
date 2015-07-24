@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 10:22:46 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 12:56:05 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,6 @@
 */
 
 #include "header.h"
-
-static void			fill_env(char **ae, t_env *e, char *stop)
-{
-	e->ae = ae;
-	while (*ae)
-	{
-		if (ft_strstr(*ae, "HOME="))
-			e->home = ft_strdup(*ae + 5);
-		else if (ft_strstr(*ae, "OLDPWD="))
-			e->old_pwd = ft_strdup(*ae + 7);
-		else if (ft_strstr(*ae, "PWD="))
-			e->pwd = ft_strdup(*ae + 4);
-		ae++;
-	}
-	e->stop = stop ? stop : e->pwd;
-	if (!(e->home) || !(e->pwd) || !(e->old_pwd) || !(e->stop))
-		error(ENV, NULL);
-}
 
 int					main(int ac, char **av, char **ae)
 {

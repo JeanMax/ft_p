@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 20:14:34 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 17:02:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,121 +19,68 @@
 
 extern int		g_nb;
 
-static void		check_cmd(char **cmd, t_env *e)
+static void		help(int c)
 {
-	int		i;
-	//char	*tmp;
-
-	i = -1;
-	while (cmd[++i])
-		if (cmd[i][0] == '~')
-		{
-			//tmp = cmd[i];
-			if (cmd[i][1] != '/')
-				cmd[i] = ft_strdup(e->home);
-			else
-				cmd[i] = ft_strjoin(e->home, cmd[i] + 1);
-			//ft_memdel((void *)tmp); //LEAAAAAK
-		}
-		else if (cmd[i][0] == '$')
-		{
-			//tmp = cmd[i];
-			cmd[i] = get_env(cmd[i] + 1, e);
-			//ft_memdel((void *)tmp); //LEAAAAAK
-		}
+	send_str(" ls     -  list server's current directory\n", c);
+	send_str(" cd     -  change server's current directory\n", c);
+	send_str(" get    -  copy file from server to client\n", c);
+	send_str(" put    -  copy file from client to server\n", c);
+	send_str(" pwd    -  show server's current directory\n", c);
+	send_str(" quit   -  disconnect and exit\n", c);
+	send_str(" cp     -  copy from server to server\n", c);
+	send_str(" mv     -  move from server to server\n", c);
+	send_str(" rm     -  delete from server\n", c);
+	send_str(" mkdir  -  make directory on server\n", c);
+	send_str(" cat    -  cat server's file\n", c);
+	send_str(" chmod  -  change server's file/dir mod\n", c);
+	send_str(" whoami -  show your client number\n", c);
+	send_str(" help   -  I guess you already found that one\n", c);
 }
 
-static char		**split_that(char *s)
+static void		exec_it(char **cmd_tab, int c_fd)
 {
-	int			i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '\'')
-		{
-			s[i] = -42;
-			while (s[++i] != '\'')
-				if (!s[i])
-					return (failn("Unmatched \'."));
-			s[i] = -42;
-		}
-		else if (s[i] == '\"')
-		{
-			s[i] = -42;
-			while (s[++i] != '\"')
-				if (!s[i])
-					return (failn("Unmatched \"."));
-			s[i] = -42;
-		}
-		else if (s[i] == ' ' || s[i] == '\t')
-			s[i] = -42;
-	}
-	return (ft_strsplit(s, -42));
-}
-
-static char		**permission_granted(char *cmd, t_env *e) //TODO
-{
-	char	**cmd_tab;
-
-	if (!(cmd_tab = split_that(cmd)))
-		return (FALSE);
-	check_cmd(cmd_tab, e);
-	return (cmd_tab);
-}
-
-static void		exec_it(char *cmd, t_env *e, int c_fd)
-{
-	char	**cmd_tab;
 	char	*tmp;
 	pid_t	pid;
-	int		out;
-	int		err;
 
-	if (!(cmd_tab = split_that(cmd)))
-		return ;
-	check_cmd(cmd_tab, e);
-	tmp = ft_strjoin("/bin/", cmd_tab[0]); //leak
-	if ((out = open("/tmp/1", O_RDWR | O_CREAT | O_TRUNC, 0664)) < 0)
-		error(OPEN, "1");
-	if ((err = open("/tmp/2", O_RDWR | O_CREAT | O_TRUNC, 0664)) < 0)
-		error(OPEN, "2");
+	tmp = ft_strjoin("/bin/", cmd_tab[0]);
 	if ((pid = (int)fork()) < 0)
 		error(FORK, ft_itoa(pid));
 	else if (!pid)
 	{
-		dup2(out, 1), dup2(err, 2), execv(tmp, cmd_tab);
+		send_str("cmdstart", c_fd);
+		dup2(c_fd, 1), dup2(c_fd, 2), execv(tmp, cmd_tab);
 		error(EXECV, tmp); exit(-1);
 	}
 	else
 		waitpid(pid, NULL, 0); //...
-	close(out), close(err);
-	if ((out = open("/tmp/1", O_RDONLY)) < 0)
-		error(OPEN, "1");
-	if ((err = open("/tmp/2", O_RDONLY)) < 0)
-		error(OPEN, "2");
-	get_all(out, &tmp), send_str(tmp, c_fd); //leak
-	get_all(err, &tmp), send_str(tmp, c_fd); //leak
-	close(out), close(err), ft_freestab(cmd_tab);
-	send_endl(ft_strlen(tmp) ? "ERROR" : "SUCCESS", c_fd);
+	*tmp = -42;
+	*(tmp + 1) = 0;
+	send(c_fd, (void *)tmp, 2, 0);
+	ft_memdel((void *)&tmp);
+	send_str("SUCCESS\n", c_fd);
 }
 
 void			exec_cmd(char *cmd, t_env *e, int c_fd)
 {
 	char	**cmd_tab;
 
-	if (!ft_strcmp(cmd, "whoami"))
-		whoami(c_fd);
-	else if (!ft_strncmp(cmd, "put", 3))
-		send_str(cmd, c_fd), recv_file(cmd, c_fd);
-	else if (!ft_strncmp(cmd, "get", 3))
-		send_str(cmd, c_fd), send_file(cmd, c_fd);
-	else if (!ft_strstr(cmd, "cd"))
-		exec_it(cmd, e, c_fd);
-	else if ((cmd_tab = permission_granted(cmd, e)))
+	if ((cmd_tab = permission_granted(cmd, e)))
 	{
-		ft_cd(cmd_tab, e, c_fd) ? send_endl("SUCCESS", c_fd) : 0;
+		if (!ft_strcmp(cmd, "whoami"))
+			whoami(c_fd);
+		else if (!ft_strncmp(cmd, "put", 3))
+			send_str(cmd, c_fd), recv_file(cmd, c_fd);
+		else if (!ft_strncmp(cmd, "get", 3))
+			send_str(cmd, c_fd), send_file(cmd, c_fd);
+		else if (ft_strstr(cmd, "cd"))
+			ft_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0;
+		else if (!ft_strcmp(cmd, "help"))
+			help(c_fd);
+		else
+			exec_it(cmd_tab, c_fd);
 		ft_freestab(cmd_tab);
 	}
+	else
+		send_str("ERROR\n", c_fd);
 	send_str("prompt", c_fd);
 }

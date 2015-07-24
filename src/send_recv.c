@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:20:35 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 16:17:44 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/23 16:29:30 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ size_t			recv_msg(int const fd, char **msg)
 	if (!(*msg = (char *)malloc((sizeof(char) * len) + 1)))
 		return (0);
 	if (recv(fd, *msg, len, 0) == -1)
+	{
+		*msg ? ft_memdel((void *)msg) : (void)0;
 		return (0);
+	}
 	return (len);
 }
 

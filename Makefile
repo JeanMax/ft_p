@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/21 14:15:50 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/24 12:55:21 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ C_NAME = Client
 S_NAME = Server
 
 C_SRC = c_main.c c_read.c c_signal.c client.c
-S_SRC =	s_main.c s_read.c s_signal.c server.c ft_cd.c s_exec.c whoami.c get_env.c
+S_SRC =	s_main.c s_read.c s_signal.c server.c ft_cd.c s_exec.c whoami.c env.c permission.c
 SHARED_SRC = error.c send_recv.c is_cmd.c
 
 C_DIR = src/client
@@ -46,26 +46,22 @@ GREEN =  \033[32;01m
 BLUE =  \033[34;01m
 BASIC = \033[0m
 
-.PHONY: all debug debug_lib leaks debug_leaks me_cry client server clean fclean zclean re brute
+.PHONY: all debug debug_lib sanitize sanitize_lib me_cry client server clean fclean zclean re brute
 
 all:
 	@$(MAKE) -C libft
 	@$(MAKE) $(C_NAME)
 	@$(MAKE) $(S_NAME)
 
+debug: CFLAGS = -g -ggdb -O2
+debug: debug_lib $(C_NAME) $(S_NAME)
 debug_lib:
 	@$(MAKE) -C libft debug
-	@$(MAKE) debug
 
-debug: CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined #-fsanitize=leak
-debug: fclean $(C_NAME) $(S_NAME)
-
-leaks:
-	@$(MAKE) -C libft leaks
-	@$(MAKE) debug_leaks
-
-debug_leaks: CFLAGS = -g -ggdb -O2 -fsanitize=leak
-debug_leaks: fclean $(C_NAME) $(S_NAME)
+sanitize: CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined
+sanitize: sanitize_lib $(C_NAME) $(S_NAME)
+sanitize_lib:
+	@$(MAKE) -C libft sanitize
 
 me_cry: CFLAGS += -Wpedantic -Wshadow -Wcast-qual -Wconversion -Wcast-align \
 				  -Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code \

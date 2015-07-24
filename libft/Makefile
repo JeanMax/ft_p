@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/20 19:51:49 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/24 12:58:10 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -82,24 +82,24 @@ GREEN =  \033[32;01m
 BLUE =  \033[34;01m
 BASIC = \033[0m
 
-.PHONY: all debug leaks clean fclean re
+.PHONY: all debug sanitize clean fclean re
 
 all:
 	@$(MAKE) $(NAME)
 
-debug: CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined
-debug: fclean $(NAME)
+debug: CFLAGS = -g -ggdb -O2
+debug: $(NAME)
 
-leaks: CFLAGS = -g -ggdb -O2 -fsanitize=leak
-leaks: fclean $(NAME)
+sanitize: CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined
+sanitize: $(NAME)
 
 -include $(DEPS)
 
 $(NAME): $(OBJS) $(INC)
-	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@ $(BASIC)"
 	@$(AR) $(NAME) $(OBJS)
-	@echo "$(WHITE)ranlib $(RED)$@"
+	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@$(BASIC)"
 	@ranlib $(NAME)
+	@echo "$(WHITE)ranlib $(RED)$@"
 	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
 	@echo "$(WHITE)compi:$(BASIC) $(CC)"
 

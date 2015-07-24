@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/27 10:26:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/23 17:43:03 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static char		go_to(char *path, t_env *e, int fd)
 		tmp2 = ft_strjoin(tmp1, path);
 		if (chdir(tmp2))
 		{
-			send_str("ERROR: cd: no such file or directory: ", fd);
-			send_endl(tmp2, fd);
+			send_str("ERROR: cd: no such file or directory: \n", fd);
+			send_str(tmp2, fd);
 			ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
 			return (FALSE);
 		}
@@ -36,8 +36,8 @@ static char		go_to(char *path, t_env *e, int fd)
 	}
 	else if (chdir(path))
 	{
-		send_str("ERROR: cd: no such file or directory: ", fd);
-		send_endl(path, fd);
+		send_str("ERROR: cd: no such file or directory: \n", fd);
+		send_str(path, fd);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -54,7 +54,7 @@ char			ft_cd(char **av, t_env *e, int fd)
 		ac++;
 	if (ac > 2)
 	{
-		send_endl("ERROR: cd: Too many arguments.", fd);
+		send_str("ERROR: cd: Too many arguments.", fd);
 		return (FALSE);
 	}
 	else if (ac == 1)
@@ -63,8 +63,8 @@ char			ft_cd(char **av, t_env *e, int fd)
 		ret = go_to(e->old_pwd, e, fd);
 	else
 		ret = go_to(av[1], e, fd);
-//	ft_memdel((void *)(e->old_pwd)); //la par contre jai pas compris ><
-	e->old_pwd = e->pwd; //no free, tout compris :P
+	ft_memdel((void *)&(e->old_pwd));
+	e->old_pwd = e->pwd;
 	e->pwd = ft_strdup(getcwd(buf, PATH_SIZE));
 	return (ret);
 }
