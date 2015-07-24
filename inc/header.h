@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 13:44:55 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 20:13:22 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ struct		s_env
 void		error(char error, char *msg);
 t_char		is_cmd(char *line);
 t_char		send_str(char const *str, int fd);
-t_char		send_endl(char const *str, int fd);
 size_t		recv_msg(int const fd, char **line);
 t_char		send_file(char *file, int fd);
 t_char		recv_file(char *file, int fd);

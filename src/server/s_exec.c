@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 17:02:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 19:03:58 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void		help(int c)
 	send_str(" chmod  -  change server's file/dir mod\n", c);
 	send_str(" whoami -  show your client number\n", c);
 	send_str(" help   -  I guess you already found that one\n", c);
+	send_str("SUCCESS\n", c);
 }
 
 static void		exec_it(char **cmd_tab, int c_fd)
@@ -55,9 +56,8 @@ static void		exec_it(char **cmd_tab, int c_fd)
 		waitpid(pid, NULL, 0); //...
 	*tmp = -42;
 	*(tmp + 1) = 0;
-	send(c_fd, (void *)tmp, 2, 0);
+	send(c_fd, (void *)tmp, 1, 0);
 	ft_memdel((void *)&tmp);
-	send_str("SUCCESS\n", c_fd);
 }
 
 void			exec_cmd(char *cmd, t_env *e, int c_fd)
@@ -67,20 +67,22 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 	if ((cmd_tab = permission_granted(cmd, e)))
 	{
 		if (!ft_strcmp(cmd, "whoami"))
-			whoami(c_fd);
+			whoami(c_fd), send_str("prompt", c_fd);
 		else if (!ft_strncmp(cmd, "put", 3))
-			send_str(cmd, c_fd), recv_file(cmd, c_fd);
+			send_str(cmd, c_fd), send_str(recv_file(cmd, c_fd) ? \
+					"SUCCESS\n" : "ERROR\n", c_fd), send_str("prompt", c_fd);
 		else if (!ft_strncmp(cmd, "get", 3))
-			send_str(cmd, c_fd), send_file(cmd, c_fd);
+			send_str(cmd, c_fd), send_str(send_file(cmd, c_fd) ? \
+					"SUCCESS\n" : "ERROR\n", c_fd), send_str("prompt", c_fd);
 		else if (ft_strstr(cmd, "cd"))
-			ft_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0;
+			ft_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0, \
+				send_str("prompt", c_fd);
 		else if (!ft_strcmp(cmd, "help"))
-			help(c_fd);
+			help(c_fd), send_str("prompt", c_fd);
 		else
 			exec_it(cmd_tab, c_fd);
 		ft_freestab(cmd_tab);
 	}
 	else
 		send_str("ERROR\n", c_fd);
-	send_str("prompt", c_fd);
 }

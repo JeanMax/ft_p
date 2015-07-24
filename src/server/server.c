@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/23 15:18:57 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 20:29:15 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void			accept_sock(int sock, t_env *e)
 			error(FORK, ft_itoa((int)pid));
 		else if (pid)
 			s_read_client(e);
-		//else : keep going!
 	}
 }
 

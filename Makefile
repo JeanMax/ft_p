@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/24 12:55:21 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/24 20:25:23 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,12 +46,9 @@ GREEN =  \033[32;01m
 BLUE =  \033[34;01m
 BASIC = \033[0m
 
-.PHONY: all debug debug_lib sanitize sanitize_lib me_cry client server clean fclean zclean re brute
+.PHONY: all debug debug_lib sanitize sanitize_lib me_cry lib client server clean fclean zclean re brute
 
-all:
-	@$(MAKE) -C libft
-	@$(MAKE) $(C_NAME)
-	@$(MAKE) $(S_NAME)
+all: lib $(C_NAME) $(S_NAME)
 
 debug: CFLAGS = -g -ggdb -O2
 debug: debug_lib $(C_NAME) $(S_NAME)
@@ -68,7 +65,10 @@ me_cry: CFLAGS += -Wpedantic -Wshadow -Wcast-qual -Wconversion -Wcast-align \
 				  -Winit-self -Wmissing-declarations -Wnonnull -Wuninitialized \
 				  -Wfloat-equal -Wbad-function-cast -Wundef -Waggregate-return \
 				  -Wstrict-overflow=5
-me_cry: $(C_NAME) $(S_NAME)
+me_cry: lib $(C_NAME) $(S_NAME)
+
+lib:
+	@$(MAKE) -C libft
 
 -include $(DEPS)
 

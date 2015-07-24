@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/23 17:26:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 20:34:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static t_char	c_read_cmd(int sock)
 	while ((i = recv(sock, buf, BUFF_SIZE, 0)) > 0)
 	{
 		buf[i] = 0;
-		if ((end = ft_strchr(buf, -42)))
+		if ((end = ft_memchr(buf, -42, (size_t)i)))
 		{
 			*end = 0;
 			ft_putstr(buf);
+			ft_putendl("SUCCESS");
+			ft_putstr_clr("$Client> ", "g");
 			return (1);
 		}
 		ft_putstr(buf);
@@ -59,7 +61,7 @@ void			c_read_server(int sock)
 			ft_putstr(line);
 		ft_memdel((void *)&line);
 	}
-	ft_putendl("Connexion to server closed. Press ^D to exit.");
+	ft_putendl("Connexion to server closed. (^D may help)");
 	line ? ft_memdel((void *)&line) : (void)0;
 	close(sock), exit(0);
 }
@@ -76,9 +78,7 @@ void			c_read_stdin(int sock)
 			break ;
 		else if (!ft_strncmp(line, "put", 3))
 			send_str(line, sock), send_file(line, sock);
-		else if (!ft_strncmp(line, "get", 3))
-			send_str(line, sock);
-		else if (is_cmd(line))
+		else if (!ft_strncmp(line, "get", 3) || is_cmd(line))
 			send_str(line, sock);
 		else
 			ft_putstr_clr("$Client> ", "g");

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 23:11:31 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 16:48:04 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 20:28:58 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_char	check_path(char **cmd, t_env *e)
 		s = *cmd;
 		if (ft_strchr(s, '/') || ft_strstr(s, ".."))
 		{
-			if (chdir(s)) //is not a dir, or does not exist
+			if (chdir(s))
 			{
 				while (*s)
 					s++;
@@ -83,11 +83,11 @@ static t_char	check_path(char **cmd, t_env *e)
 				while (s != *cmd && *s != '/')
 					s--;
 				if (chdir(s))
-					return (0); //does not exist, abort cmd
+					return (0);
 			}
 			getcwd(buf, PATH_SIZE), chdir(e->pwd);
 			if (ft_strncmp(e->path, buf, ft_strlen(e->path)))
-				return (0); //does not include allowed path
+				return (0);
 		}
 		cmd++;
 	}

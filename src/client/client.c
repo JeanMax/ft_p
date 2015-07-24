@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:08 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/20 22:59:51 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 20:30:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ static int				create_client(char *addr, int port)
 
 void					client(char **av)
 {
-	int				port; //del var?
 	int				sock;
 	pid_t			pid;
 
-	port = ft_atoi(av[2]);
 	c_sig_init();
-	sock = create_client(av[1], port);
+	sock = create_client(av[1], ft_atoi(av[2]));
 	ft_putstr_clr("$Client> ", "g");
 	if ((pid = fork()) < 0)
 		error(FORK, ft_itoa((int)pid));

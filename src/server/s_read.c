@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:21:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/23 17:51:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/24 18:57:48 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void			s_read_client(t_env *e)
 	ft_putstr("Hey "), ft_putnbr(g_nb);
 	ft_putstr_clr("\n$Server> ", "g");
 	line = NULL;
-	while ((len = recv_msg(g_cs[g_nb], &line)))
+	while (1)
 	{
-		if (!line)
+		len = recv_msg(g_cs[g_nb], &line);
+		if (!line || !len)
 			continue ;
 		line[len] = 0;
 		if (!ft_strcmp(line, "quit"))
