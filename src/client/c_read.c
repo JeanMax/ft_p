@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:34:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/25 12:49:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			c_read_server(int sock)
 			ft_putstr(line);
 		ft_memdel((void *)&line);
 	}
-	ft_putendl("Connexion to server closed. (^D may help)");
+	ft_putendl("Connexion to server closed.");
 	line ? ft_memdel((void *)&line) : (void)0;
 	close(sock), exit(0);
 }
