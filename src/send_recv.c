@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:20:35 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:22:41 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/29 00:00:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 
 t_char			send_str(char const *str, int fd)
 {
-	size_t		len;
+	t_char		len;
+	size_t		size;
 
-	if (!(len = ft_strlen(str)))
+	if (!(size = ft_strlen(str)) || size > 127)
 		return (0);
+	len = (t_char)size;
 	if (send(fd, &len, sizeof(len), 0) == -1)
 		return (0);
 	return (send(fd, (void *)str, len, 0) != -1 ? 1 : 0);
@@ -29,12 +31,12 @@ t_char			send_str(char const *str, int fd)
 
 size_t			recv_msg(int const fd, char **msg)
 {
-	size_t		len;
+	t_char		len;
 
 	len = 0;
 	if (recv(fd, &len, sizeof(len), 0) == -1)
 		return (0);
-	if (!len || len > 1024)
+	if (!len || len > 127)
 		return (0);
 	if (!(*msg = (char *)malloc((sizeof(char) * len) + 1)))
 		return (0);
