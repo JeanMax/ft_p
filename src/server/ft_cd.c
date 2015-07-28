@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/23 17:43:03 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/29 00:10:50 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char		go_to(char *path, t_env *e, int fd)
 		if (chdir(tmp2))
 		{
 			send_str("ERROR: cd: no such file or directory: \n", fd);
-			send_str(tmp2, fd);
+			send_str(tmp2, fd), send_str("\n", fd);
 			ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
 			return (FALSE);
 		}
@@ -37,7 +37,7 @@ static char		go_to(char *path, t_env *e, int fd)
 	else if (chdir(path))
 	{
 		send_str("ERROR: cd: no such file or directory: \n", fd);
-		send_str(path, fd);
+		send_str(path, fd), send_str("\n", fd);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -54,7 +54,7 @@ char			ft_cd(char **av, t_env *e, int fd)
 		ac++;
 	if (ac > 2)
 	{
-		send_str("ERROR: cd: Too many arguments.", fd);
+		send_str("ERROR: cd: Too many arguments.\n", fd);
 		return (FALSE);
 	}
 	else if (ac == 1)

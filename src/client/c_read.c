@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/25 12:49:57 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/29 00:22:19 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void			c_read_server(int sock)
 		else if (!ft_strcmp(line, "cmdstart"))
 			c_read_cmd(sock);
 		else if (!ft_strncmp(line, "get", 3))
-			recv_file(line, sock);
+			ft_putendl(recv_file(line, sock) ? \
+				"SUCCESS" : "ERROR"), ft_putstr_clr("$Client> ", "g");
 		else if (ft_strncmp(line, "put", 3))
 			ft_putstr(line);
 		ft_memdel((void *)&line);
@@ -77,7 +78,8 @@ void			c_read_stdin(int sock)
 		if (!ft_strcmp(line, "quit"))
 			break ;
 		else if (!ft_strncmp(line, "put", 3))
-			send_str(line, sock), send_file(line, sock);
+			send_str(line, sock), ft_putendl(send_file(line, sock) ? \
+				"SUCCESS" : "ERROR"), ft_putstr_clr("$Client> ", "g");
 		else if (!ft_strncmp(line, "get", 3) || is_cmd(line))
 			send_str(line, sock);
 		else

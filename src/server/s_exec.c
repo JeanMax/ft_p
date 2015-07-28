@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:55:24 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/29 00:23:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 		if (!ft_strcmp(cmd, "whoami"))
 			whoami(c_fd), send_str("prompt", c_fd);
 		else if (!ft_strncmp(cmd, "put", 3))
-			send_str(cmd, c_fd), send_str(recv_file(cmd, c_fd) ? \
-					"SUCCESS\n" : "ERROR\n", c_fd), send_str("prompt", c_fd);
+			send_str(cmd, c_fd), recv_file(cmd, c_fd);
 		else if (!ft_strncmp(cmd, "get", 3))
-			send_str(cmd, c_fd), send_str(send_file(cmd, c_fd) ? \
-					"SUCCESS\n" : "ERROR\n", c_fd), send_str("prompt", c_fd);
+			send_str(cmd, c_fd), send_file(cmd, c_fd);
 		else if (ft_strstr(cmd, "cd"))
 			ft_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0, \
 				send_str("prompt", c_fd);
@@ -84,5 +82,5 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 		ft_freestab(cmd_tab);
 	}
 	else
-		send_str("ERROR\n", c_fd);
+		send_str("ERROR\n", c_fd), send_str("prompt", c_fd);;
 }
