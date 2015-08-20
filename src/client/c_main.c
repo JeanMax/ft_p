@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 19:59:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/19 15:34:48 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 ** this is the client's main!
 */
 
-#include "header.h"
+#include "client.h"
 
-int					main(int ac, char **av)
+int					main(int ac, char **av, char **ae)
 {
 	char		*s;
 	t_char		dot;
@@ -32,9 +32,8 @@ int					main(int ac, char **av)
 		s++;
 	}
 	dot = 0;
+	av[1] = ft_strcmp(av[1], "localhost") ? av[1] : ft_strdup("127.0.0.1"); //leak
 	s = av[1];
-	if (!ft_strcmp(s, "localhost"))
-		av[1] = ft_strdup("127.0.0.1");
 	while (*s)
 	{
 		if (!ft_isdigit(*s))

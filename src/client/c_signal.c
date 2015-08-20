@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:39:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:28:18 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/19 14:31:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 ** this is the place where signals are handled!
 */
 
-#include "header.h"
+#include "client.h"
 
 static void		c_sig_handl(int sig)
 {

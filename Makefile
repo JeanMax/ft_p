@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/24 20:25:23 by mcanal           ###   ########.fr        #
+#    Updated: 2015/08/19 15:17:43 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,9 +34,9 @@ OBJS =	$(C_SRC:%.c=$(O_DIR)/%.o) \
 DEPS =  $(OBJS:%.o=%.d)
 
 LIB = libft/libft.a
-I_DIR = -I inc/
+I_DIR = -I inc/ -I libft/inc/
 CFLAGS = -Wall -Wextra -Werror -O2
-CC = clang
+CC = clang-3.5
 RM = rm -rf
 MKDIR = mkdir -p
 

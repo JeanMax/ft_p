@@ -14,7 +14,7 @@
 ** this is the place to handle signals of course!
 */
 
-#include "header.h"
+#include "server.h"
 
 extern int		g_cs[MAX_CLIENTS];
 extern int		g_nb;

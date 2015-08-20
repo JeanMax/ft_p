@@ -6,14 +6,14 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/07/24 12:58:10 by mcanal           ###   ########.fr        #
+#    Updated: 2015/08/19 12:36:20 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
 I_DIR = -I inc/
 INC = inc/libft.h
-CC = clang
+CC = clang-3.5
 AR = ar rc
 RM = rm -rf
 MKDIR = mkdir -p

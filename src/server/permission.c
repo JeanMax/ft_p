@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "server.h"
 
 static void		check_cmd(char **cmd, t_env *e)
 {

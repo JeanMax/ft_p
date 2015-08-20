@@ -14,7 +14,7 @@
 ** server side
 */
 
-#include "header.h"
+#include "server.h"
 
 int			g_cs[MAX_CLIENTS];
 int			g_nb;

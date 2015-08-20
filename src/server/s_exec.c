@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/29 00:23:24 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/19 12:35:51 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 ** quit is already handled in the s_read_client function
 */
 
-#include "header.h"
+#include "server.h"
 
 extern int		g_nb;
 
@@ -82,5 +82,5 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 		ft_freestab(cmd_tab);
 	}
 	else
-		send_str("ERROR\n", c_fd), send_str("prompt", c_fd);;
+		send_str("ERROR\naccess denied\n", c_fd), send_str("prompt", c_fd);
 }

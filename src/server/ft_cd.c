@@ -14,7 +14,7 @@
 ** cd builtin
 */
 
-#include "header.h"
+#include "server.h"
 
 static char		go_to(char *path, t_env *e, int fd)
 {

@@ -14,7 +14,7 @@
 ** simple send and receive functions
 */
 
-#include "header.h"
+#include "ft_p.h"
 
 t_char			send_str(char const *str, int fd)
 {

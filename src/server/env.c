@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "server.h"
 
 void			fill_env(char **ae, t_env *e, char *path)
 {

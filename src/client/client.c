@@ -14,7 +14,7 @@
 ** client side
 */
 
-#include "header.h"
+#include "client.h"
 
 static int				create_client(char *addr, int port)
 {

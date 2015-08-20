@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_main.c                                           :+:      :+:    :+:   */
+/*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 17:42:36 by mcanal           ###   ########.fr       */
+/*   Created: 2015/07/29 21:14:04 by mcanal            #+#    #+#             */
+/*   Updated: 2015/08/19 15:23:41 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CLIENT_H
+
 /*
-** this is the server's main!
+** define
 */
+# define CLIENT_H
 
-#include "server.h"
+/*
+** include
+*/
+# include "ft_p.h"
+# include <netinet/in.h>
+# include <arpa/inet.h>
 
-int					main(int ac, char **av, char **ae)
-{
-	t_env		e;
-	char		*s;
+/*
+** client prototypes
+*/
+void		c_read_stdin(int sock);
+void		c_read_server(int sock);
+void		c_sig_init(void);
+void		client(char **av);
 
-	if (ac < 2 || ac > 3)
-		error(S_USAGE, av[0]);
-	s = av[1];
-	if (ft_istoobig(s))
-		error(S_USAGE, av[0]);
-	while (*s)
-	{
-		if (!ft_isdigit(*s))
-			error(S_USAGE, av[0]);
-		s++;
-	}
-	ac == 3 ? fill_env(ae, &e, av[2]) : fill_env(ae, &e, NULL);
-	server(av, &e);
-	return (0);
-}
+#endif //CLIENT_H

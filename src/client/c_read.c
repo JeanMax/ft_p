@@ -14,7 +14,7 @@
 ** handle client's reading on stdin/server
 */
 
-#include "header.h"
+#include "client.h"
 
 static t_char	c_read_cmd(int sock)
 {
