@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:08 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/25 12:48:35 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/20 16:32:29 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int				create_client(char *addr, int port)
 	return (sock);
 }
 
-void					client(char **av)
+void					client(char **av, t_env *e)
 {
 	int				sock;
 	pid_t			pid;
@@ -46,5 +46,5 @@ void					client(char **av)
 	else if (pid)
 		c_read_server(sock);
 	else
-		c_read_stdin(sock);
+		c_read_stdin(sock, e);
 }

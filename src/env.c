@@ -6,11 +6,15 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 23:42:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/28 20:33:34 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/20 16:42:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+/*
+** Mostly some env filling, added some str -> *str function (with env check)
+*/
+
+#include "ft_p.h"
 
 void			fill_env(char **ae, t_env *e, char *path)
 {
@@ -46,4 +50,57 @@ char		*get_env(char *var, t_env *e)
 						   ft_strlen(var) : (size_t)ft_strindex(ae[i], '=')))
 		i++;
 	return (ae[i] ? ft_strdup(ae[i] + len + 1) : ft_strnew(1));
+}
+
+void		check_cmd(char **cmd, t_env *e)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	while (cmd[++i])
+		if (cmd[i][0] == '~')
+		{
+			tmp = cmd[i];
+			if (cmd[i][1] != '/')
+				cmd[i] = ft_strdup(e->home);
+			else
+				cmd[i] = ft_strjoin(e->home, cmd[i] + 1);
+			ft_memdel((void *)&tmp);
+		}
+		else if (cmd[i][0] == '$')
+		{
+			tmp = cmd[i];
+			cmd[i] = get_env(cmd[i] + 1, e);
+			ft_memdel((void *)&tmp);
+		}
+}
+
+char		**split_that(char *s, t_env *e)
+{
+	int			i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == '\'')
+		{
+			s[i] = -42;
+			while (s[++i] != '\'')
+				if (!s[i])
+					return (failn("Unmatched \'."));
+			s[i] = -42;
+		}
+		else if (s[i] == '\"')
+		{
+			s[i] = -42;
+			while (s[++i] != '\"')
+				if (!s[i])
+					return (failn("Unmatched \"."));
+			s[i] = -42;
+		}
+		else if (s[i] == ' ' || s[i] == '\t')
+			s[i] = -42;
+	}
+	return (ft_strsplit(s, -42));
 }

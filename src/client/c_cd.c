@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   c_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/29 00:10:50 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/20 16:29:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "server.h"
 
-static char		go_to(char *path, t_env *e, int fd)
+static char		go_to(char *path, t_env *e)
 {
 	char		*tmp1;
 	char		*tmp2;
@@ -27,8 +27,7 @@ static char		go_to(char *path, t_env *e, int fd)
 		tmp2 = ft_strjoin(tmp1, path);
 		if (chdir(tmp2))
 		{
-			send_str("ERROR: cd: no such file or directory: \n", fd);
-			send_str(tmp2, fd), send_str("\n", fd);
+			failn("ERROR: cd: no such file or directory: "), failn(tmp2);
 			ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
 			return (FALSE);
 		}
@@ -36,14 +35,13 @@ static char		go_to(char *path, t_env *e, int fd)
 	}
 	else if (chdir(path))
 	{
-		send_str("ERROR: cd: no such file or directory: \n", fd);
-		send_str(path, fd), send_str("\n", fd);
+		failn("ERROR: cd: no such file or directory: "), failn(path);
 		return (FALSE);
 	}
 	return (TRUE);
 }
 
-char			ft_cd(char **av, t_env *e, int fd)
+char			c_cd(char **av, t_env *e)
 {
 	int		ac;
 	char	buf[PATH_SIZE];
@@ -54,15 +52,15 @@ char			ft_cd(char **av, t_env *e, int fd)
 		ac++;
 	if (ac > 2)
 	{
-		send_str("ERROR: cd: Too many arguments.\n", fd);
+		failn("ERROR: cd: Too many arguments.");
 		return (FALSE);
 	}
 	else if (ac == 1)
-		ret = go_to(e->home, e, fd);
+		ret = go_to(e->home, e);
 	else if (ac > 1 && !ft_strcmp(av[1], "-"))
-		ret = go_to(e->old_pwd, e, fd);
+		ret = go_to(e->old_pwd, e);
 	else
-		ret = go_to(av[1], e, fd);
+		ret = go_to(av[1], e);
 	ft_memdel((void *)&(e->old_pwd));
 	e->old_pwd = e->pwd;
 	e->pwd = ft_strdup(getcwd(buf, PATH_SIZE));

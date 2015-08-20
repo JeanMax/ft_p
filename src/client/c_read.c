@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/29 00:22:19 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/20 16:31:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void			c_read_server(int sock)
 	close(sock), exit(0);
 }
 
-void			c_read_stdin(int sock)
+void			c_read_stdin(int sock, t_env *e)
 {
 	char		*line;
 
@@ -80,6 +80,8 @@ void			c_read_stdin(int sock)
 		else if (!ft_strncmp(line, "put", 3))
 			send_str(line, sock), ft_putendl(send_file(line, sock) ? \
 				"SUCCESS" : "ERROR"), ft_putstr_clr("$Client> ", "g");
+        else if (is_local_cmd(line))
+            exec_local(line, e);
 		else if (!ft_strncmp(line, "get", 3) || is_cmd(line))
 			send_str(line, sock);
 		else

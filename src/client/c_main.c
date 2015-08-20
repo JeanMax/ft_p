@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/19 15:34:48 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/20 16:32:04 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int					main(int ac, char **av, char **ae)
 {
 	char		*s;
 	t_char		dot;
+    t_env		e;
 
 	if (ac != 3)
 		error(C_USAGE, av[0]);
+	fill_env(ae, &e, NULL);
 	s = av[2];
 	ft_istoobig(s) ? error(C_USAGE, av[0]) : (void)0;
 	while (*s)
@@ -40,6 +42,6 @@ int					main(int ac, char **av, char **ae)
 			*s == '.' && dot < 3 ? (void)dot++ : error(C_USAGE, av[0]);
 		s++;
 	}
-	client(av);
+	client(av, &e);
 	return (0);
 }

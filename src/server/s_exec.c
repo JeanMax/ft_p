@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/19 12:35:51 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/20 16:07:04 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 		else if (!ft_strncmp(cmd, "get", 3))
 			send_str(cmd, c_fd), send_file(cmd, c_fd);
 		else if (ft_strstr(cmd, "cd"))
-			ft_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0, \
+			s_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0, \
 				send_str("prompt", c_fd);
 		else if (!ft_strcmp(cmd, "help"))
 			help(c_fd), send_str("prompt", c_fd);
