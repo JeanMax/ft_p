@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:29:15 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/27 10:55:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 #include "server.h"
 
-int			g_cs[MAX_CLIENTS];
-int			g_nb;
+int				g_cs[MAX_CLIENTS];
+int				g_nb;
 
-static int				create_server(int port)
+static int		create_server(int port)
 {
 	int					sock;
 	struct protoent		*proto;
@@ -61,7 +61,7 @@ void			accept_sock(int sock, t_env *e)
 	}
 }
 
-void				server(char **av, t_env *e)
+void			server(char **av, t_env *e)
 {
 	int				port;
 	int				sock;

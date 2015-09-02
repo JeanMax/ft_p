@@ -6,14 +6,13 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/08/20 15:08:46 by mcanal           ###   ########.fr        #
+#    Updated: 2015/08/25 22:32:50 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
 I_DIR = -I inc/
 INC = inc/libft.h
-CC = clang
 AR = ar rc
 RM = rm -rf
 MKDIR = mkdir -p
@@ -75,6 +74,12 @@ OBJS =	$(C_EDIT1:%.c=$(O_DIR)/%.o)			$(C_EDIT2:%.c=$(O_DIR)/%.o)	\
 		$(C_LST1:%.c=$(O_DIR)/%.o)			$(C_LST2:%.c=$(O_DIR)/%.o)	\
 		$(C_MEM:%.c=$(O_DIR)/%.o)			$(C_STR:%.c=$(O_DIR)/%.o)
 DEPS =  $(OBJS:%.o=%.d)
+
+ifeq ($(shell uname), Linux)
+CC = clang-3.5
+else
+CC = clang
+endif
 
 WHITE = \033[37;01m
 RED = \033[31;01m

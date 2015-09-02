@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/29 20:44:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:58:44 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 15:03:06 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,27 @@
 
 #include "client.h"
 
-void	exec_local(char *cmd, t_env *e)
+char	exec_local(char *cmd, t_env *e)
 {
 	char	*tmp;
 	pid_t	pid;
-    char	**cmd_tab;
+	char	**cmd_tab;
+	int		status;
 
-    if (!(cmd_tab = split_that(cmd, e)))//TODO: Free
-        return ; //...
-    check_cmd(cmd_tab, e);
-	tmp = ft_strjoin("/bin/", cmd_tab[0]);
+	status = 42;
+	if (!(cmd_tab = split_that(cmd)))
+		error(MALLOC, "cmd_tab");
+	check_cmd(cmd_tab, e);
+	if (*(cmd + 1) == 'c' && *(cmd + 2) == 'd')
+		return (c_cd(cmd_tab, e));
+	tmp = ft_strjoin("/bin/", *cmd_tab + 1);
 	if ((pid = (int)fork()) < 0)
 		error(FORK, ft_itoa(pid));
 	else if (!pid)
-		execv(tmp, cmd_tab), error(EXECV, tmp), exit(-1);
+		execv(tmp, cmd_tab), error(EXECV, tmp), exit(EXIT_FAILURE);
 	else
-		wait(NULL);
-    //TODO: success/error
+		wait4(pid, &status, 0, NULL);
 	ft_memdel((void *)&tmp);
+	ft_freestab(cmd_tab);
+	return (WEXITSTATUS(status) ? FALSE : TRUE);
 }

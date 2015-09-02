@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/29 21:17:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:52:17 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 15:03:44 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 */
 char		s_cd(char **av, t_env *e, int fd);
 void		whoami(int c_fd);
-char		**permission_granted(char *cmd, t_env *e);
+char		**permission_granted(char *cmd, t_env *e	);
 void		exec_cmd(char *cmd, t_env *e, int c_fd);
 void		s_read_client(t_env *e);
 void		s_sig_init(void);

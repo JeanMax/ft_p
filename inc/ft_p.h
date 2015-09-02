@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:43:14 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:48:22 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/time.h>
+# include <sys/resource.h>
 
 /*
 ** enum
@@ -83,7 +85,7 @@ t_char		send_file(char *file, int fd);
 t_char		recv_file(char *file, int fd);
 void		fill_env(char **ae, t_env *e, char *stop);
 char		*get_env(char *var, t_env *e);
-char		**split_that(char *s, t_env *e);
+char		**split_that(char *s);
 void		check_cmd(char **cmd, t_env *e);
 
 #endif

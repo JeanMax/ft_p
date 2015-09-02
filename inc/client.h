@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/29 21:14:04 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:52:08 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:32:02 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /*
 ** client prototypes
 */
-void		exec_local(char *cmd, t_env *e);
+char		exec_local(char *cmd, t_env *e);
 char		c_cd(char **av, t_env *e);
 void		c_read_stdin(int sock, t_env *e);
 void		c_read_server(int sock);

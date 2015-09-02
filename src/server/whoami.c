@@ -6,13 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 23:40:46 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/28 20:22:37 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/27 10:54:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-extern int      g_nb;
+extern int	g_nb;
 
 void		whoami(int c_fd)
 {

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/09 19:39:48 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:22:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:19:29 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void		error(char e, char *msg)
 		fail("Open failed with file: "), failn(msg);
 	else if (e == PATH)
 		fail("Invalid minimum folder: "), failn(msg);
-	e != OPEN ? exit(-1) : (void)0;
+	e != OPEN ? exit(EXIT_FAILURE) : (void)0;
 }

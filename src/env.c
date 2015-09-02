@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 23:42:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:42:57 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 11:28:43 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ void			fill_env(char **ae, t_env *e, char *path)
 		error(ENV, NULL);
 }
 
-char		*get_env(char *var, t_env *e)
+char			*get_env(char *var, t_env *e)
 {
 	char		**ae;
-	int			 i;
-	size_t		 len;
+	int			i;
+	size_t		len;
 
 	ae = e->ae;
 	i = 0;
 	len = ft_strlen(var);
 	while (ae[i] && ft_strncmp(ae[i], var,
-						   (int)ft_strlen(var) > ft_strindex(ae[i], '=') ?
-						   ft_strlen(var) : (size_t)ft_strindex(ae[i], '=')))
+					(int)ft_strlen(var) > ft_strindex(ae[i], '=') ?
+					ft_strlen(var) : (size_t)ft_strindex(ae[i], '=')))
 		i++;
 	return (ae[i] ? ft_strdup(ae[i] + len + 1) : ft_strnew(1));
 }
 
-void		check_cmd(char **cmd, t_env *e)
+void			check_cmd(char **cmd, t_env *e)
 {
 	int		i;
 	char	*tmp;
@@ -76,7 +76,7 @@ void		check_cmd(char **cmd, t_env *e)
 		}
 }
 
-char		**split_that(char *s, t_env *e)
+char			**split_that(char *s)
 {
 	int			i;
 

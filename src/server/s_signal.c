@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:34:21 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 20:28:30 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/27 10:56:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ void			s_sig_handl(int i)
 	else if (i == SIGINT)
 	{
 		i = 0;
-        while (i <= g_nb)
-            g_cs[i] > 0 ? send_str("quit", g_cs[i]) : 0, i++;
+		while (i <= g_nb)
+		{
+			g_cs[i] > 0 ? send_str("quit", g_cs[i]) : 0;
+			i++;
+		}
 		exit(0);
 	}
 	else if (i == 29)

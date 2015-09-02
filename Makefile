@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/08/20 16:42:08 by mcanal           ###   ########.fr        #
+#    Updated: 2015/08/25 22:32:33 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,9 +36,14 @@ DEPS =  $(OBJS:%.o=%.d)
 LIB = libft/libft.a
 I_DIR = -I inc/ -I libft/inc/
 CFLAGS = -Wall -Wextra -Werror -O2
-CC = clang
 RM = rm -rf
 MKDIR = mkdir -p
+
+ifeq ($(shell uname), Linux)
+CC = clang-3.5
+else
+CC = clang
+endif
 
 WHITE = \033[37;01m
 RED = \033[31;01m

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 23:11:31 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:35:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:13:02 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ char			**permission_granted(char *cmd, t_env *e)
 {
 	char	**cmd_tab;
 
-	if (!(cmd_tab = split_that(cmd, e)))
+	if (!(cmd_tab = split_that(cmd)))
 		return (FALSE);
-    check_cmd(cmd_tab, e);
+	check_cmd(cmd_tab, e);
 	if (!(check_path(cmd_tab, e)))
 	{
-		chdir(e->pwd), ft_freestab(cmd_tab);
+		chdir(e->pwd);
+		ft_freestab(cmd_tab);
 		return (FALSE);
 	}
 	return (cmd_tab);

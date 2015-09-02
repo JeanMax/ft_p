@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:32:04 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:19:12 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int					main(int ac, char **av, char **ae)
 {
 	char		*s;
 	t_char		dot;
-    t_env		e;
+	t_env		e;
 
 	if (ac != 3)
 		error(C_USAGE, av[0]);
@@ -43,5 +43,5 @@ int					main(int ac, char **av, char **ae)
 		s++;
 	}
 	client(av, &e);
-	return (0);
+	return (EXIT_SUCCESS);
 }

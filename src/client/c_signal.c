@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:39:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/19 14:31:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/08/27 11:18:50 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		c_sig_handl(int sig)
 	else if (sig == SIGSEGV)
 		error(SEG, NULL);
 	else if (sig == SIGFPE)
-		error (FPE, NULL);
+		error(FPE, NULL);
 	else if (sig == SIGINT)
 	{
 		ft_putstr("\b \b\b \b\n");

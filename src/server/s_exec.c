@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:07:04 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:45:12 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ static void		exec_it(char **cmd_tab, int c_fd)
 	else if (!pid)
 	{
 		send_str("cmdstart", c_fd);
-		dup2(c_fd, 1), dup2(c_fd, 2), execv(tmp, cmd_tab);
+		dup2(c_fd, 1);
+		dup2(c_fd, 2);
+		execv(tmp, cmd_tab);
 		error(EXECV, tmp); exit(-1);
 	}
 	else
-		waitpid(pid, NULL, 0); //...
+		wait4(pid, NULL, 0, NULL);
 	*tmp = -42;
 	*(tmp + 1) = 0;
 	send(c_fd, (void *)tmp, 1, 0);

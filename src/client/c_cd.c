@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:29:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:14:22 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 ** cd builtin
 */
 
-#include "server.h"
+#include "client.h"
 
 static char		go_to(char *path, t_env *e)
 {

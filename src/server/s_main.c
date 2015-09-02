@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:15:40 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/02 14:18:53 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int					main(int ac, char **av, char **ae)
 	}
 	ac == 3 ? fill_env(ae, &e, av[2]) : fill_env(ae, &e, NULL);
 	server(av, &e);
-	return (0);
+	return (EXIT_SUCCESS);
 }
