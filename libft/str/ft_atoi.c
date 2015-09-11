@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:19:53 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:28:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 23:18:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		count_digit(char *str)
 	tmp = str;
 	while (*tmp && ft_isdigit(*tmp))
 		tmp++;
-	return (int)(str - tmp);
+	return (int)(tmp - str);
 }
 
 int				ft_atoi(char *str)
