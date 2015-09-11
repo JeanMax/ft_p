@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/29 21:14:04 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/02 14:32:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 15:51:29 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,4 @@ void		c_read_server(int sock);
 void		c_sig_init(void);
 void		client(char **av, t_env *e);
 
-#endif //CLIENT_H
+#endif

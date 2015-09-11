@@ -1,0 +1,116 @@
+Norme: src/client/c_cd.c
+Error (line 30, col 3): Multi expression statements
+Error (line 31, col 3): Multi expression statements
+Error (line 34, col 2): Multi expression statements
+Error (line 38, col 2): Multi expression statements
+Norme: src/client/c_cmd.c
+Error (line 36, col 2): Multi expression statements
+Norme: src/client/c_main.c
+Error (line 19): function main has 26 lines
+Error (line 37): line has 83 characters
+Error (line 37): C++ comment
+Norme: src/client/c_read.c
+Error (line 59, col 3): Multi expression statements
+Error (line 67, col 1): Multi expression statements
+Error (line 81, col 3): Multi expression statements
+Error (line 84): line has 96 characters
+Error (line 84, col 3): Multi expression statements
+Error (line 93, col 1): Multi expression statements
+Norme: src/client/c_signal.c
+Norme: src/client/client.c
+Norme: src/client/c_cd.c
+Error (line 30, col 3): Multi expression statements
+Error (line 31, col 3): Multi expression statements
+Error (line 34, col 2): Multi expression statements
+Error (line 38, col 2): Multi expression statements
+Norme: src/client/c_cmd.c
+Error (line 36, col 2): Multi expression statements
+Norme: src/client/c_main.c
+Error (line 19): function main has 26 lines
+Error (line 37): line has 83 characters
+Error (line 37): C++ comment
+Norme: src/client/c_read.c
+Error (line 59, col 3): Multi expression statements
+Error (line 67, col 1): Multi expression statements
+Error (line 81, col 3): Multi expression statements
+Error (line 84): line has 96 characters
+Error (line 84, col 3): Multi expression statements
+Error (line 93, col 1): Multi expression statements
+Norme: src/client/c_signal.c
+Norme: src/client/client.c
+Norme: src/env.c
+Error (line 21, col 5): bad spacing
+Error (line 27, col 2): Multi expression statements
+Norme: src/error.c
+Error (line 22, col 2): Multi expression statements
+Error (line 24, col 2): Multi expression statements
+Error (line 26, col 2): Multi expression statements
+Error (line 28, col 2): Multi expression statements
+Error (line 30, col 2): Multi expression statements
+Error (line 32, col 2): Multi expression statements
+Error (line 47, col 2): Multi expression statements
+Error (line 49, col 2): Multi expression statements
+Error (line 51, col 2): Multi expression statements
+Error (line 53, col 2): Multi expression statements
+Error (line 57, col 2): Multi expression statements
+Error (line 59, col 2): Multi expression statements
+Norme: src/is_cmd.c
+Norme: src/send_recv.c
+Error (line 60): C++ comment
+Error (line 61): bad spacing before send_file
+Error (line 69, col 2): Multi expression statements
+Error (line 90): C++ comment
+Error (line 91): bad spacing before recv_file
+Error (line 100, col 2): Multi expression statements
+Error (line 109): bad indentation
+Error (line 110): bad indentation
+Error (line 111): bad indentation
+Error (line 112): bad indentation
+Norme: src/server/permission.c
+Error (line 39, col 3): Multi expression statements
+Norme: src/server/s_cd.c
+Error (line 31, col 3): Multi expression statements
+Error (line 32, col 3): Multi expression statements
+Error (line 35, col 2): Multi expression statements
+Error (line 40, col 2): Multi expression statements
+Norme: src/server/s_exec.c
+Error (line 55): 2 instructions
+Error (line 72, col 3): Multi expression statements
+Error (line 74, col 3): Multi expression statements
+Error (line 76, col 3): Multi expression statements
+Error (line 78, col 3): Multi expression statements
+Error (line 81, col 3): Multi expression statements
+Error (line 87, col 2): Multi expression statements
+Norme: src/server/s_main.c
+Norme: src/server/s_read.c
+Norme: src/server/s_signal.c
+Error (line 29, col 8): Spacing after call to error
+Norme: src/server/server.c
+Norme: src/server/whoami.c
+Norme: src/server/permission.c
+Error (line 39, col 3): Multi expression statements
+Norme: src/server/s_cd.c
+Error (line 31, col 3): Multi expression statements
+Error (line 32, col 3): Multi expression statements
+Error (line 35, col 2): Multi expression statements
+Error (line 40, col 2): Multi expression statements
+Norme: src/server/s_exec.c
+Error (line 55): 2 instructions
+Error (line 72, col 3): Multi expression statements
+Error (line 74, col 3): Multi expression statements
+Error (line 76, col 3): Multi expression statements
+Error (line 78, col 3): Multi expression statements
+Error (line 81, col 3): Multi expression statements
+Error (line 87, col 2): Multi expression statements
+Norme: src/server/s_main.c
+Norme: src/server/s_read.c
+Norme: src/server/s_signal.c
+Error (line 29, col 8): Spacing after call to error
+Norme: src/server/server.c
+Norme: src/server/whoami.c
+Norme: inc/client.h
+Norme: inc/ft_p.h
+Error: 42 header not well formatted
+Norme: inc/server.h
+Error (line 30, col 47): space before )
+Error (line 38): C++ comment
