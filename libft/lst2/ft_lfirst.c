@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lfirst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 03:58:41 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/22 14:24:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:54:05 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "libft.h"
 
-t_lst *ft_lfirst(t_lst **alst)
+t_lst			*ft_lfirst(t_lst **alst)
 {
 	t_lst	*tmp;
 

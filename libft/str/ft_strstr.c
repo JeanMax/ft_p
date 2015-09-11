@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:30:16 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:06:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:09:52 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "libft.h"
 
-char *ft_strstr(const char *str, const char *to_find)
+char			*ft_strstr(const char *str, const char *to_find)
 {
 	return (ft_strnstr(str, to_find, ft_strlen(str)));
 }

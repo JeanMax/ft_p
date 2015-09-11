@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:37:18 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:46:28 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:56:05 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void			ft_bzero(void *s, size_t n)
 {
 	char *swap;
 

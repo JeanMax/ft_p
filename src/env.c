@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 23:42:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/02 11:28:43 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:31:34 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@
 
 void			fill_env(char **ae, t_env *e, char *path)
 {
-	char    buf[PATH_SIZE];
+	char	buf[PATH_SIZE];
 
 	if (!*ae)
 		error(ENV, NULL);
 	e->ae = ae;
 	if (!path)
-		getcwd(buf, PATH_SIZE), path = buf;
+	{
+		getcwd(buf, PATH_SIZE);
+		path = buf;
+	}
 	if (chdir(path))
 		error(PATH, path);
 	getcwd(buf, PATH_SIZE);

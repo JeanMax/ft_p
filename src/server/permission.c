@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 23:11:31 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/02 14:13:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 20:13:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@ static t_char	check_path(char **cmd, t_env *e)
 				while (s != *cmd && *s != '/')
 					s--;
 				if (chdir(s))
-					return (0);
+					return (FALSE);
 			}
-			getcwd(buf, PATH_SIZE), chdir(e->pwd);
+			getcwd(buf, PATH_SIZE);
+			chdir(e->pwd);
 			if (ft_strncmp(e->path, buf, ft_strlen(e->path)))
-				return (0);
+				return (FALSE);
 		}
 		cmd++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 char			**permission_granted(char *cmd, t_env *e)

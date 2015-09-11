@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/26 23:19:06 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/14 23:45:07 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:45:13 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 */
 
 #include "libft.h"
-#include  <unistd.h>
+#include <unistd.h>
 
-void	ft_putstr_clr(char *s, char *clr)
+void			ft_putstr_clr(char *s, char *clr)
 {
 	if (*clr == 'r')
 		write(1, "\033[31;01m", 8);

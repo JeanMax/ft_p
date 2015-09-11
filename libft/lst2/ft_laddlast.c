@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_laddlast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 03:07:11 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/22 14:22:21 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:54:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "libft.h"
 
-void ft_laddlast(t_lst **alst, t_lst *new)
+void			ft_laddlast(t_lst **alst, t_lst *new)
 {
 	t_lst	*tmp;
 

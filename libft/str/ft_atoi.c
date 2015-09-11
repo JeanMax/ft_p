@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:19:53 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 19:52:34 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:28:23 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 
 #include "libft.h"
 
-static int	count_digit(char *str)
+static int		count_digit(char *str)
 {
-	int	i;
+	char	*tmp;
 
-	i = 0;
-	while (*str && ft_isdigit(*str))
-		i++, str++;
-	return (i);
+	if (!str)
+		return (FALSE);
+	tmp = str;
+	while (*tmp && ft_isdigit(*tmp))
+		tmp++;
+	return (int)(str - tmp);
 }
 
-int			ft_atoi(char *str)
+int				ft_atoi(char *str)
 {
 	int		sign;
 	int		num;

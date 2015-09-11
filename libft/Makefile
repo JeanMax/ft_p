@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/08/25 22:32:50 by mcanal           ###   ########.fr        #
+#    Updated: 2015/09/11 19:19:02 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -100,7 +100,7 @@ sanitize: $(NAME)
 
 -include $(DEPS)
 
-$(NAME): $(OBJS) $(INC)
+$(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
 	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@$(BASIC)"
 	@ranlib $(NAME)

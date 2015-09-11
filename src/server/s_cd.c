@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:24:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 20:15:03 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,20 @@ static char		go_to(char *path, t_env *e, int fd)
 		if (chdir(tmp2))
 		{
 			send_str("ERROR: cd: no such file or directory: \n", fd);
-			send_str(tmp2, fd), send_str("\n", fd);
-			ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
+			send_str(tmp2, fd);
+			send_str("\n", fd);
+			ft_memdel((void *)&tmp1);
+			ft_memdel((void *)&tmp2);
 			return (FALSE);
 		}
-		ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
+		ft_memdel((void *)&tmp1);
+		ft_memdel((void *)&tmp2);
 	}
 	else if (chdir(path))
 	{
 		send_str("ERROR: cd: no such file or directory: \n", fd);
-		send_str(path, fd), send_str("\n", fd);
+		send_str(path, fd);
+		send_str("\n", fd);
 		return (FALSE);
 	}
 	return (TRUE);

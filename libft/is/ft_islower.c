@@ -19,6 +19,6 @@
 int		ft_islower(int c)
 {
 	if (c >= 97 && c <= 122)
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:40:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 01:43:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:55:37 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #include "libft.h"
 
-void *ft_memmove(void *dest, const void *src, size_t n)
+void			*ft_memmove(void *dest, const void *src, size_t n)
 {
 	char		*d_swap;
 	const char	*s_swap;

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:11:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 19:14:59 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:03:31 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char *ft_strdup(char *src)
+char			*ft_strdup(char *src)
 {
 	char			*dup;
 	char			*swap;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 02:29:26 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/12 14:56:49 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:49:45 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "libft.h"
 
-void ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+void			ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
 	if (lst && f)
 	{

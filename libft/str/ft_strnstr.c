@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:45:03 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:12:50 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:51:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "libft.h"
 
-char *ft_strnstr(const char *s1, const char *s2, size_t n)
+char			*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
 	size_t len;
 
@@ -33,5 +33,5 @@ char *ft_strnstr(const char *s1, const char *s2, size_t n)
 			return ((char *)s1);
 		s1++;
 	}
-	return (0);
+	return (NULL);
 }

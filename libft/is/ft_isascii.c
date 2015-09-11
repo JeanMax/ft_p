@@ -20,6 +20,6 @@
 int		ft_isascii(int i)
 {
 	if (i >= 0 && i <= 127)
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

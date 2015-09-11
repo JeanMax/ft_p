@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 02:21:02 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/09 05:21:32 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:11:28 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include "libft.h"
 
-void ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+void			ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 {
 	if (!alst || !*alst || !del)
 		return ;

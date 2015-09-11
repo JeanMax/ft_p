@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/02 15:02:34 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 20:06:54 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static t_char	c_read_cmd(int sock)
 			ft_putstr(buf);
 			ft_putendl("SUCCESS");
 			ft_putstr_clr("$Client> ", "g");
-			return (1);
+			return (TRUE);
 		}
 		ft_putstr(buf);
 	}
-	return (0);
+	return (FALSE);
 }
 
 void			c_read_server(int sock)
@@ -56,15 +56,18 @@ void			c_read_server(int sock)
 		else if (!ft_strcmp(line, "cmdstart"))
 			c_read_cmd(sock);
 		else if (!ft_strncmp(line, "get", 3))
-			ft_putendl(recv_file(line, sock) ? \
-				"SUCCESS" : "ERROR"), ft_putstr_clr("$Client> ", "g");
+		{
+			ft_putendl(recv_file(line, sock) ? "SUCCESS" : "ERROR");
+			ft_putstr_clr("$Client> ", "g");
+		}
 		else if (ft_strncmp(line, "put", 3))
 			ft_putstr(line);
 		ft_memdel((void *)&line);
 	}
 	ft_putendl("Connexion to server closed.");
 	line ? ft_memdel((void *)&line) : (void)0;
-	close(sock), exit(0);
+	close(sock);
+	exit(EXIT_SUCCESS);
 }
 
 void			c_read_stdin(int sock, t_env *e)
@@ -78,10 +81,16 @@ void			c_read_stdin(int sock, t_env *e)
 		if (!ft_strcmp(line, "quit"))
 			break ;
 		else if (!ft_strncmp(line, "put", 3))
-			send_str(line, sock), ft_putendl(send_file(line, sock) ? \
-				"SUCCESS" : "ERROR"), ft_putstr_clr("$Client> ", "g");
+		{
+			send_str(line, sock);
+			ft_putendl(send_file(line, sock) ? "SUCCESS" : "ERROR");
+			ft_putstr_clr("$Client> ", "g");
+		}
 		else if (is_local_cmd(line))
-			ft_putstr(exec_local(line, e) ? "SUCCESS\n" : ""), ft_putstr_clr("$Client> ", "g");
+		{
+			ft_putstr(exec_local(line, e) ? "SUCCESS\n" : "");
+			ft_putstr_clr("$Client> ", "g");	
+		}
 		else if (!ft_strncmp(line, "get", 3) || is_cmd(line))
 			send_str(line, sock);
 		else
@@ -90,5 +99,6 @@ void			c_read_stdin(int sock, t_env *e)
 	}
 	send_str("quit", sock);
 	line ? ft_memdel((void *)&line) : (void)0;
-	close(sock), exit(0);
+	close(sock);
+	exit(EXIT_SUCCESS);
 }

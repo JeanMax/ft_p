@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_liter.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 02:29:26 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/22 14:41:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:53:59 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "libft.h"
 
-void ft_liter(t_lst *lst, void (*f)(t_lst *elem))
+void			ft_liter(t_lst *lst, void (*f)(t_lst *elem))
 {
 	if (lst && f)
 	{

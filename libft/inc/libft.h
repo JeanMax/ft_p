@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/24 13:39:04 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:15:42 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define BUFF_SIZE	512
 # define TRUE		1
 # define FALSE		0
+# define INT_MAX    2147483647
+# define INT_MIN    (-INT_MAX - 1)
 
 # include <string.h>
 # include "edit.h"

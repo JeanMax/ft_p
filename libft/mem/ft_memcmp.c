@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:39:48 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:27:10 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:56:18 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "libft.h"
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+int				ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	const unsigned char *swap1;
 	const unsigned char *swap2;
@@ -34,5 +34,5 @@ int ft_memcmp(const void *s1, const void *s2, size_t n)
 			swap2++;
 		}
 	}
-	return (0);
+	return (FALSE);
 }

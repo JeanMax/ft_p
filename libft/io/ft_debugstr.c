@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/26 23:24:49 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/14 23:12:28 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:42:19 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 */
 
 #include "libft.h"
-#include  <unistd.h>
+#include <unistd.h>
 
-void	ft_debugstr(char *name, char *str)
+void			ft_debugstr(char *name, char *str)
 {
 	write(1, "\033[31;01m<", 9);
 	write(1, name, ft_strlen(name));

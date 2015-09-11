@@ -22,6 +22,6 @@
 int	ft_isalpha(int i)
 {
 	if ((i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z'))
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

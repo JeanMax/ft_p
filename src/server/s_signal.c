@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:34:21 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/27 10:56:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 20:20:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			s_sig_handl(int i)
 	else if (i == SIGSEGV)
 		error(SEG, NULL);
 	else if (i == SIGFPE)
-		error (FPE, NULL);
+		error(FPE, NULL);
 	else if (i == SIGINT)
 	{
 		i = 0;
@@ -35,7 +35,7 @@ void			s_sig_handl(int i)
 			g_cs[i] > 0 ? send_str("quit", g_cs[i]) : 0;
 			i++;
 		}
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	else if (i == 29)
 		ft_putstr_clr("$Server> ", "g");

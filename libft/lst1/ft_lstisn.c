@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstisn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 23:47:29 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/12 08:53:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:49:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 #include "libft.h"
 
-int ft_lstisn(t_list **alst, t_list *lst)
+int				ft_lstisn(t_list **alst, t_list *lst)
 {
 	t_list	*tmp;
 	int		i;
 
 	if (!alst || !lst)
-		return (0);
+		return (FALSE);
 	if (*alst == lst)
-		return (1);
+		return (TRUE);
 	tmp = *alst;
 	i = 2;
 	while (tmp->next != NULL && tmp->next != lst)
@@ -34,6 +34,6 @@ int ft_lstisn(t_list **alst, t_list *lst)
 		i++;
 	}
 	if (tmp->next != lst)
-		return (0);
+		return (FALSE);
 	return (i);
 }

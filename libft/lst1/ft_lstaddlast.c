@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstaddlast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 03:07:11 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/12 17:56:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:49:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "libft.h"
 
-void ft_lstaddlast(t_list **alst, t_list *new)
+void			ft_lstaddlast(t_list **alst, t_list *new)
 {
 	t_list	*tmp;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isxdigit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 04:14:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 01:44:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:46:46 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 #include "libft.h"
 
-int ft_isxdigit(int c)
+int				ft_isxdigit(int c)
 {
 	if (ft_isdigit(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

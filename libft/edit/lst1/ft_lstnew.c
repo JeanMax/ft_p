@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 22:07:36 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/09 04:07:57 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:47:37 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-		return (0);
+		return (NULL);
 	if (content)
 	{
 		new->content = malloc(content_size);
 		if (!new->content)
-			return (0);
+			return (NULL);
 		new->content_size = content_size;
 		ft_memcpy(new->content, content, content_size);
 	}

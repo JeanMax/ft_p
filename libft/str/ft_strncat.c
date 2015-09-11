@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:43:58 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:16:19 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:04:04 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include "libft.h"
 
-char *ft_strncat(char *dest, const char *src, size_t n)
+char			*ft_strncat(char *dest, const char *src, size_t n)
 {
 	char *swap;
 

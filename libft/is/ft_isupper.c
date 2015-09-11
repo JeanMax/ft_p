@@ -19,6 +19,6 @@
 int	ft_isupper(int c)
 {
 	if (c >= 65 && c <= 90)
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

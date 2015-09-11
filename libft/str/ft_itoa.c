@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 16:50:06 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/10 04:49:48 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:50:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char			*ft_itoa(int n)
 	}
 	str = ft_strnew(len);
 	if (!str)
-		return (0);
+		return (NULL);
 	str[--len] = n % 10 + '0';
 	while (n /= 10)
 		str[--len] = n % 10 + '0';

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstisempty.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 03:24:38 by mcanal            #+#    #+#             */
 /*   Updated: 2014/11/12 16:41:25 by mcanal           ###   ########.fr       */
@@ -19,6 +19,6 @@
 int		ft_lstisempty(t_list **alst)
 {
 	if (*alst == NULL)
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

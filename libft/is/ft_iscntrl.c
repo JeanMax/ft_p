@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iscntrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 04:10:56 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 01:44:51 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:47:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 #include "libft.h"
 
-int ft_iscntrl(int c)
+int				ft_iscntrl(int c)
 {
 	if (c < 32 || c == 127)
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

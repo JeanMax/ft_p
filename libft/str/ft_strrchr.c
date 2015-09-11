@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:45:49 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:12:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:09:44 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "libft.h"
 
-char *ft_strrchr(const char *s, int c)
+char			*ft_strrchr(const char *s, int c)
 {
 	const char *ret;
 

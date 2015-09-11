@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isgraph.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 04:10:53 by mcanal            #+#    #+#             */
-/*   Updated: 2015/03/09 01:45:08 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 18:46:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 #include "libft.h"
 
-int ft_isgraph(int c)
+int				ft_isgraph(int c)
 {
 	if (c >= 33 && c <= 126)
-		return (8);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

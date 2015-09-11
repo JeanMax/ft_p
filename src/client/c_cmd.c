@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/29 20:44:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/02 15:03:06 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 20:00:37 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ char	exec_local(char *cmd, t_env *e)
 	if ((pid = (int)fork()) < 0)
 		error(FORK, ft_itoa(pid));
 	else if (!pid)
-		execv(tmp, cmd_tab), error(EXECV, tmp), exit(EXIT_FAILURE);
+	{
+		execv(tmp, cmd_tab);
+		error(EXECV, tmp);
+	}
 	else
 		wait4(pid, &status, 0, NULL);
 	ft_memdel((void *)&tmp);

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lislast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 04:32:18 by mcanal            #+#    #+#             */
 /*   Updated: 2014/11/22 14:25:45 by mcanal           ###   ########.fr       */
@@ -19,8 +19,8 @@
 int	ft_lislast(t_lst **alst)
 {
 	if (!alst)
-		return (0);
+		return (FALSE);
 	if ((*alst)->next == NULL)
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }

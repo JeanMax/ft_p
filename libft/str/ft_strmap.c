@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 16:38:29 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:18:54 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:50:04 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	size_t	i;
 
 	if (!s || !f)
-		return (0);
+		return (NULL);
 	str = ft_strnew(ft_strlen(s));
 	if (!str)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{

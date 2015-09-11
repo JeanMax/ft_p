@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:38:44 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 21:26:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:48:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "libft.h"
 
-void *ft_memccpy(void *dest, const void *src, int c, size_t n)
+void			*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
 	char		*dswap;
 	const char	*sswap;
@@ -36,5 +36,5 @@ void *ft_memccpy(void *dest, const void *src, int c, size_t n)
 			*dswap++ = *sswap++;
 		}
 	}
-	return (0);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 16:44:56 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/10 17:27:09 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 19:51:03 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strtrim(char const *s)
 	char	*swap;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	while (*s && (ft_isblank(*s) || *s == '\n'))
 		s++;
 	if (!*s)
@@ -37,7 +37,7 @@ char	*ft_strtrim(char const *s)
 		len--;
 	swap = ft_strnew(len);
 	if (!swap)
-		return (0);
+		return (NULL);
 	swap = ft_strncpy(swap, s, len + 1);
 	swap[len + 1] = '\0';
 	return (swap);

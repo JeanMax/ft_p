@@ -24,7 +24,7 @@ int		get_all(int const fd, char **a)
 	char	buf[BUFF_SIZE + 1];
 
 	if (!a || fd < 0)
-		return (0);
+		return (FALSE);
 	*a = ft_strnew(1);
 	while ((i = read(fd, buf, BUFF_SIZE)) > 0)
 	{
@@ -34,6 +34,6 @@ int		get_all(int const fd, char **a)
 		ft_strcat(*a, buf);
 	}
 	if (!*a || i < 0)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }

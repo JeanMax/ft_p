@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/02 14:45:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/11 20:18:49 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void		exec_it(char **cmd_tab, int c_fd)
 		dup2(c_fd, 1);
 		dup2(c_fd, 2);
 		execv(tmp, cmd_tab);
-		error(EXECV, tmp); exit(-1);
+		error(EXECV, tmp);
+		exit(EXIT_FAILURE);
 	}
 	else
 		wait4(pid, NULL, 0, NULL);
@@ -69,20 +70,37 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 	if ((cmd_tab = permission_granted(cmd, e)))
 	{
 		if (!ft_strcmp(cmd, "whoami"))
-			whoami(c_fd), send_str("prompt", c_fd);
+		{
+			whoami(c_fd);
+			send_str("prompt", c_fd);			
+		}
 		else if (!ft_strncmp(cmd, "put", 3))
-			send_str(cmd, c_fd), recv_file(cmd, c_fd);
+		{
+			send_str(cmd, c_fd);
+			recv_file(cmd, c_fd);			
+		}
 		else if (!ft_strncmp(cmd, "get", 3))
-			send_str(cmd, c_fd), send_file(cmd, c_fd);
+		{
+			send_str(cmd, c_fd);
+			send_file(cmd, c_fd);			
+		}
 		else if (ft_strstr(cmd, "cd"))
-			s_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0, \
-				send_str("prompt", c_fd);
+		{
+			s_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0;
+			send_str("prompt", c_fd);			
+		}
 		else if (!ft_strcmp(cmd, "help"))
-			help(c_fd), send_str("prompt", c_fd);
+		{
+			help(c_fd);
+			send_str("prompt", c_fd);
+		}
 		else
 			exec_it(cmd_tab, c_fd);
 		ft_freestab(cmd_tab);
 	}
 	else
-		send_str("ERROR\naccess denied\n", c_fd), send_str("prompt", c_fd);
+	{
+		send_str("ERROR\naccess denied\n", c_fd);
+		send_str("prompt", c_fd);
+	}
 }
