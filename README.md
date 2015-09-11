@@ -5,6 +5,9 @@ TCP/IP Client/Server
 
 ### TODO: ###
 
+* leaks tests
+* mac os tests
+* norme :
 ```
 Norme: src/send_recv.c
 Error (line 60): function send_file has 26 lines
