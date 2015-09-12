@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:20:35 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:41:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 18:38:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ t_char			send_file(char *file, int fd)
 	*buf = -42;
 	*(buf + 1) = -43;
 	*(buf + 2) = -44;
-	*(buf + 3) = -45;
-	*(buf + 4) = 12;
-	*(buf + 5) = 0;
+	*(buf + 3) = 12;
+	*(buf + 4) = 0;
 	if (send(fd, (void *)buf, 6, 0) == -1)
 		return (FALSE);
 	close(file_fd);
@@ -105,7 +104,7 @@ t_char			recv_file(char *file, int fd)
 		buf[i] = 0;
 		file = NULL;
 		if ((file = ft_memchr(buf, -42, (size_t)i)) && *(file + 1) == -43 \
-			&& *(file + 2) == -44 && *(file + 3) == -45 && *(file + 4) == 12)
+			&& *(file + 2) == -44 && *(file + 3) == 12)
 		{
 			write(file_fd, (void *)buf, (size_t)(file - buf));
 			break ;

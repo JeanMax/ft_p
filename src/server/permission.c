@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 23:11:31 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 20:13:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 18:35:45 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 
 #include "server.h"
 
-static t_char	check_path(char **cmd, t_env *e)
+static t_char	check_path(char **cmd, t_env *e, char *s)
 {
 	char	buf[PATH_SIZE];
-	char	*s;
 
 	while (*cmd)
 	{
@@ -53,7 +52,7 @@ char			**permission_granted(char *cmd, t_env *e)
 	if (!(cmd_tab = split_that(cmd)))
 		return (FALSE);
 	check_cmd(cmd_tab, e);
-	if (!(check_path(cmd_tab, e)))
+	if (!(check_path(cmd_tab, e, NULL)))
 	{
 		chdir(e->pwd);
 		ft_freestab(cmd_tab);

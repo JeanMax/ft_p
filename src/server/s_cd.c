@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 20:15:03 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 18:31:23 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 */
 
 #include "server.h"
+
+static char		useless_error_function(char *path, int fd)
+{
+	send_str("ERROR: cd: no such file or directory: \n", fd);
+	send_str(path, fd);
+	send_str("\n", fd);
+	return (FALSE);
+}
 
 static char		go_to(char *path, t_env *e, int fd)
 {
@@ -38,12 +46,7 @@ static char		go_to(char *path, t_env *e, int fd)
 		ft_memdel((void *)&tmp2);
 	}
 	else if (chdir(path))
-	{
-		send_str("ERROR: cd: no such file or directory: \n", fd);
-		send_str(path, fd);
-		send_str("\n", fd);
-		return (FALSE);
-	}
+		return (useless_error_function(path, fd));
 	return (TRUE);
 }
 

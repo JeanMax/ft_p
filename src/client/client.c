@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 00:34:08 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/20 16:32:29 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 18:40:23 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ void					client(char **av, t_env *e)
 	else if (pid)
 		c_read_server(sock);
 	else
+	{
+		signal(SIGINT, SIG_IGN);
 		c_read_stdin(sock, e);
+	}
 }

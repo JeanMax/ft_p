@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/12 15:30:33 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 18:44:01 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 */
 
 #include "client.h"
+
+static void		useless_exit_function(int sock, char **line, char server)
+{
+	server ? ft_putendl("Connexion to server closed.") : send_str("quit", sock);
+	if (line)
+		ft_memdel((void *)line);
+	close(sock);
+	exit(EXIT_SUCCESS);
+}
 
 static t_char	c_read_cmd(int sock)
 {
@@ -64,17 +73,13 @@ void			c_read_server(int sock)
 			ft_putstr(line);
 		ft_memdel((void *)&line);
 	}
-	ft_putendl("Connexion to server closed.");
-	line ? ft_memdel((void *)&line) : (void)0;
-	close(sock);
-	exit(EXIT_SUCCESS);
+	useless_exit_function(sock, &line, TRUE);
 }
 
 void			c_read_stdin(int sock, t_env *e)
 {
 	char		*line;
 
-	signal(SIGINT, SIG_IGN);
 	line = NULL;
 	while (get_line(0, &line))
 	{
@@ -97,8 +102,5 @@ void			c_read_stdin(int sock, t_env *e)
 			ft_putstr_clr("$Client> ", "g");
 		ft_memdel((void *)&line);
 	}
-	send_str("quit", sock);
-	line ? ft_memdel((void *)&line) : (void)0;
-	close(sock);
-	exit(EXIT_SUCCESS);
+	useless_exit_function(sock, &line, FALSE);
 }
