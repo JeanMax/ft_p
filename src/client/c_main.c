@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 20:03:01 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 15:34:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int					main(int ac, char **av, char **ae)
 	s = av[2];
 	ft_istoobig(s) ? error(C_USAGE, *av) : (void)0;
 	while (*s)
-		ft_isdigit(*s) ? s++ : error(C_USAGE, *av);
+		ft_isdigit(*s) ? (void)s++ : error(C_USAGE, *av);
 	dot = 0;
 	av[1] = ft_strcmp(av[1], "localhost") ? av[1] : ft_strdup("127.0.0.1");
 	s = av[1];

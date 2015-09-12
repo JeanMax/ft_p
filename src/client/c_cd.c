@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:54:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:59:08 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 15:27:17 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static char		go_to(char *path, t_env *e)
 			ft_memdel((void *)&tmp2);
 			return (FALSE);
 		}
-		ft_memdel((void *)&tmp1), ft_memdel((void *)&tmp2);
+		ft_memdel((void *)&tmp1);
+		ft_memdel((void *)&tmp2);
 	}
 	else if (chdir(path))
 	{

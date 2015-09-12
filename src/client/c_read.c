@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 20:06:54 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/12 15:30:33 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			c_read_stdin(int sock, t_env *e)
 		else if (is_local_cmd(line))
 		{
 			ft_putstr(exec_local(line, e) ? "SUCCESS\n" : "");
-			ft_putstr_clr("$Client> ", "g");	
+			ft_putstr_clr("$Client> ", "g");
 		}
 		else if (!ft_strncmp(line, "get", 3) || is_cmd(line))
 			send_str(line, sock);
