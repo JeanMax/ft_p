@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/12 18:44:01 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/15 20:06:37 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 static void		useless_exit_function(int sock, char **line, char server)
 {
-	server ? ft_putendl("Connexion to server closed.") : send_str("quit", sock);
+	server ? ft_putendl("Connexion to server closed.") : \
+		(void)send_str("quit", sock);
 	if (line)
 		ft_memdel((void *)line);
 	close(sock);
@@ -34,7 +35,7 @@ static t_char	c_read_cmd(int sock)
 	while ((i = recv(sock, buf, BUFF_SIZE, 0)) > 0)
 	{
 		buf[i] = 0;
-		if ((end = ft_memchr(buf, -42, (size_t)i)))
+		if ((end = ft_memchr(buf, -43, (size_t)i)))
 		{
 			*end = 0;
 			ft_putstr(buf);

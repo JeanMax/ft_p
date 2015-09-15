@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/12 18:28:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/15 21:52:46 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ static void		help(int c)
 	send_str(" cat	-	cat server's file\n", c);
 	send_str(" chmod	-	change server's file/dir mod\n", c);
 	send_str(" whoami -	show your client number\n", c);
+	send_str(" lls	 -	list client's current directory\n", c);
+	send_str(" lpwd	-	show client's current directory\n", c);
+	send_str(" lcat	-	cat client's file\n", c);
+	send_str(" lchmod	-	change client's file/dir mod\n", c);
+	send_str(" lcp	 -	copy from client to client\n", c);
+	send_str(" lmv	 -	move from client to client\n", c);
+	send_str(" lrm	 -	delete from client\n", c);
+	send_str(" lmkdir	-	make directory on client\n", c);
+	send_str(" lcd	 -	change client's current directory\n", c);
 	send_str(" help	-	I guess you already found that one\n", c);
 	send_str("SUCCESS\n", c);
 }
@@ -56,7 +65,7 @@ static void		exec_it(char **cmd_tab, int c_fd)
 	}
 	else
 		wait4(pid, NULL, 0, NULL);
-	*tmp = -42;
+	*tmp = -43;
 	*(tmp + 1) = 0;
 	send(c_fd, (void *)tmp, 1, 0);
 	ft_memdel((void *)&tmp);
@@ -95,7 +104,7 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 
 	if ((cmd_tab = permission_granted(cmd, e)))
 	{
-		if (ft_strstr(cmd, "cd"))
+		if (!ft_strncmp("cd", cmd, 2))
 		{
 			s_cd(cmd_tab, e, c_fd) ? send_str("SUCCESS\n", c_fd) : 0;
 			send_str("prompt", c_fd);

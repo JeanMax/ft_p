@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:15:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/15 22:14:34 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "edit.h"
 
 typedef unsigned char	t_char;
+typedef int				t_bool;
 
 /*
 ** io
