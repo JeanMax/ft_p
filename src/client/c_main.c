@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 23:20:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/12 15:34:07 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/17 16:28:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 */
 
 #include "client.h"
+
+static char			*convert_addr(char *s)
+{
+	if (!ft_strcmp(s, "localhost") || \
+		!ft_strcmp(s, "0000:0000:0000:0000:0000:0000:0000:0001") || \
+		!ft_strcmp(s, "::1"))
+		return (ft_strdup("127.0.0.1"));
+	return (s);
+}
 
 int					main(int ac, char **av, char **ae)
 {
@@ -30,7 +39,7 @@ int					main(int ac, char **av, char **ae)
 	while (*s)
 		ft_isdigit(*s) ? (void)s++ : error(C_USAGE, *av);
 	dot = 0;
-	av[1] = ft_strcmp(av[1], "localhost") ? av[1] : ft_strdup("127.0.0.1");
+	av[1] = convert_addr(av[1]);
 	s = av[1];
 	while (*s)
 	{
