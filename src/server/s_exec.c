@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/18 10:00:09 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 14:33:54 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		exec_it(char **cmd_tab, int c_fd)
 	}
 	else
 		wait4(pid, NULL, 0, NULL);
-	*tmp = -43;
+	*tmp = -42;
 	*(tmp + 1) = 0;
 	send(c_fd, (void *)tmp, 1, 0);
 	ft_memdel((void *)&tmp);
@@ -85,7 +85,7 @@ static char		exec_builtin(char *cmd, int c_fd)
 	}
 	else if (!ft_strncmp(cmd, "get", 3))
 	{
-		if (!is_file(cmd + 5))
+		if (!is_file(cmd + 4))
 			return (send_str("ERROR\n", c_fd), send_str("prompt", c_fd));
 		send_str(cmd, c_fd);
 		send_file(cmd, c_fd);
@@ -104,7 +104,9 @@ void			exec_cmd(char *cmd, t_env *e, int c_fd)
 {
 	char	**cmd_tab;
 
-	if ((cmd_tab = permission_granted(cmd, e)))
+	if (is_local_cmd(cmd))
+		send_str(cmd, c_fd);
+	else if ((cmd_tab = permission_granted(cmd, e)))
 	{
 		if (!ft_strncmp("cd", cmd, 2))
 		{

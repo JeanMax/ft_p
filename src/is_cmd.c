@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 23:09:08 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/15 21:42:00 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 14:31:48 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_char		is_cmd(char *line)
 		ft_strncmp(line, "mv ", 3) && ft_strncmp(line, "rm ", 3) && \
 		ft_strncmp(line, "get ", 4) && ft_strncmp(line, "put ", 4) && \
 		ft_strncmp(line, "cd ", 3) && ft_strcmp(line, "whoami") && \
-		ft_strcmp(line, "ls") && ft_strcmp(line, "cd") \
-		&& ft_strcmp(line, "help"))
+		ft_strcmp(line, "ls") && ft_strcmp(line, "cd") && \
+		ft_strcmp(line, "help"))
 		return (FALSE);
 	return (TRUE);
 }

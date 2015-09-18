@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:20:35 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/15 22:33:31 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 11:26:22 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_char			recv_file(char *file, int fd)
 	ssize_t	i;
 
 	if ((file_fd = open(get_file_name(file), \
-						O_WRONLY | O_CREAT | O_APPEND | O_EXCL, 0664)) < 0)
+						O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
 	{
 		error(OPEN, get_file_name(file));
 		send_str("Open failed.\n", fd);

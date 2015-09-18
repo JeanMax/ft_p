@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:21:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/27 11:13:57 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 14:35:34 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			s_read_client(t_env *e)
 		line[len] = 0;
 		if (!ft_strcmp(line, "quit"))
 			break ;
-		if (is_cmd(line))
+		if (is_cmd(line) || is_local_cmd(line))
 		{
 			say_cmd(line);
 			exec_cmd(line, e, g_cs[g_nb]);
