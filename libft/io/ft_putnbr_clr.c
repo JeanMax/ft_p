@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/26 23:12:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/14 23:22:50 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/17 00:22:38 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,9 @@
 
 void	ft_putnbr_clr(int nbr, char *clr)
 {
-	ft_putstr_clr(ft_itoa(nbr), clr);
+	char	*wasting_cpu;
+
+	wasting_cpu = ft_itoa(nbr);
+	ft_putstr_clr(wasting_cpu, clr);
+	ft_memdel((void *)&wasting_cpu);
 }

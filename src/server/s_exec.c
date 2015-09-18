@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/15 21:52:46 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 10:00:09 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,29 @@ extern int		g_nb;
 
 static void		help(int c)
 {
-	send_str(" ls	 -	list server's current directory\n", c);
-	send_str(" cd	 -	change server's current directory\n", c);
-	send_str(" get	-	copy file from server to client\n", c);
-	send_str(" put	-	copy file from client to server\n", c);
-	send_str(" pwd	-	show server's current directory\n", c);
-	send_str(" quit	-	disconnect and exit\n", c);
-	send_str(" cp	 -	copy from server to server\n", c);
-	send_str(" mv	 -	move from server to server\n", c);
-	send_str(" rm	 -	delete from server\n", c);
-	send_str(" mkdir	-	make directory on server\n", c);
-	send_str(" cat	-	cat server's file\n", c);
-	send_str(" chmod	-	change server's file/dir mod\n", c);
-	send_str(" whoami -	show your client number\n", c);
-	send_str(" lls	 -	list client's current directory\n", c);
-	send_str(" lpwd	-	show client's current directory\n", c);
-	send_str(" lcat	-	cat client's file\n", c);
-	send_str(" lchmod	-	change client's file/dir mod\n", c);
-	send_str(" lcp	 -	copy from client to client\n", c);
-	send_str(" lmv	 -	move from client to client\n", c);
-	send_str(" lrm	 -	delete from client\n", c);
-	send_str(" lmkdir	-	make directory on client\n", c);
-	send_str(" lcd	 -	change client's current directory\n", c);
-	send_str(" help	-	I guess you already found that one\n", c);
+	send_str(" ls      -   list server's current directory\n", c);
+	send_str(" cd      -   change server's current directory\n", c);
+	send_str(" get     -   copy file from server to client\n", c);
+	send_str(" put     -   copy file from client to server\n", c);
+	send_str(" pwd     -   show server's current directory\n", c);
+	send_str(" quit    -   disconnect and exit\n", c);
+	send_str(" cp      -   copy from server to server\n", c);
+	send_str(" mv      -   move from server to server\n", c);
+	send_str(" rm      -   delete from server\n", c);
+	send_str(" mkdir   -   make directory on server\n", c);
+	send_str(" cat     -   cat server's file\n", c);
+	send_str(" chmod   -   change server's file/dir mod\n", c);
+	send_str(" whoami  -   show your client number\n", c);
+	send_str(" lls     -   list client's current directory\n", c);
+	send_str(" lpwd    -   show client's current directory\n", c);
+	send_str(" lcat    -   cat client's file\n", c);
+	send_str(" lchmod  -   change client's file/dir mod\n", c);
+	send_str(" lcp     -   copy from client to client\n", c);
+	send_str(" lmv     -   move from client to client\n", c);
+	send_str(" lrm     -   delete from client\n", c);
+	send_str(" lmkdir  -   make directory on client\n", c);
+	send_str(" lcd     -   change client's current directory\n", c);
+	send_str(" help    -   I guess you already found that one\n", c);
 	send_str("SUCCESS\n", c);
 }
 
@@ -85,6 +85,8 @@ static char		exec_builtin(char *cmd, int c_fd)
 	}
 	else if (!ft_strncmp(cmd, "get", 3))
 	{
+		if (!is_file(cmd + 5))
+			return (send_str("ERROR\n", c_fd), send_str("prompt", c_fd));
 		send_str(cmd, c_fd);
 		send_file(cmd, c_fd);
 	}

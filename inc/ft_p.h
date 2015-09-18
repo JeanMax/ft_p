@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 18:40:46 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 09:19:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void		fill_env(char **ae, t_env *e, char *stop);
 char		*get_env(char *var, t_env *e);
 char		**split_that(char *s);
 void		check_cmd(char **cmd, t_env *e);
+t_char		is_file(char *file);
 
 #endif

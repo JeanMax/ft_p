@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 23:42:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:31:34 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 09:31:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,11 @@ char			**split_that(char *s)
 			s[i] = -42;
 	}
 	return (ft_strsplit(s, -42));
+}
+
+t_char			is_file(char *file)
+{
+	struct stat	buf;
+
+	return ((!lstat(file, &buf) && (buf.st_mode & S_IFREG)) ? TRUE : FALSE);
 }

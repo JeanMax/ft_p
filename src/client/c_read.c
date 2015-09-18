@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:42:19 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/15 20:06:37 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 09:57:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void			c_read_stdin(int sock, t_env *e)
 	{
 		if (!ft_strcmp(line, "quit"))
 			break ;
-		else if (!ft_strncmp(line, "put", 3))
+		else if (!ft_strncmp(line, "put ", 4))
 		{
-			send_str(line, sock);
-			ft_putendl(send_file(line, sock) ? "SUCCESS" : "ERROR");
+			is_file(line + 4) && send_str(line, sock) && send_file(line, sock) ?
+				ft_putendl("SUCCESS") : ft_putendl("ERROR");
 			ft_putstr_clr("$Client> ", "g");
 		}
 		else if (is_local_cmd(line))
@@ -97,10 +97,10 @@ void			c_read_stdin(int sock, t_env *e)
 			ft_putstr(exec_local(line, e) ? "SUCCESS\n" : "");
 			ft_putstr_clr("$Client> ", "g");
 		}
-		else if (!ft_strncmp(line, "get", 3) || is_cmd(line))
+		else if (!ft_strncmp(line, "get ", 4) || is_cmd(line))
 			send_str(line, sock);
 		else
-			ft_putstr_clr("$Client> ", "g");
+			send_str("help", sock);
 		ft_memdel((void *)&line);
 	}
 	useless_exit_function(sock, &line, FALSE);
