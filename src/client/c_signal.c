@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 04:39:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/08/27 11:18:50 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 19:26:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void			c_sig_init(void)
 	signal(SIGBUS, c_sig_handl);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGCHLD, SIG_IGN);
+	if (signal(SIGCHLD, SIG_IGN) == SIG_ERR)
+		exit(EXIT_SUCCESS);
 }

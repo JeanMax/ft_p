@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 12:20:35 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/18 11:26:22 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 19:12:36 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,16 @@ size_t			recv_msg(int const fd, char **msg)
 	return (len);
 }
 
-static char		*get_file_name(char *s)
+static char		*get_file_name(char *s, char trunc)
 {
+	char	*tmp;
+
 	while (*s && *s != ' ' && *s != -42)
 		s++;
 	while (*s && (*s == ' ' || *s == -42))
 		s++;
+	if (trunc && (tmp = ft_strrchr(s, '/')))
+		return (tmp - 1);
 	return (s);
 }
 
@@ -63,9 +67,9 @@ t_char			send_file(char *file, int fd)
 	char		buf[BUFF_SIZE + 1];
 	ssize_t		i;
 
-	if ((file_fd = open(get_file_name(file), O_RDONLY)) < 0)
+	if ((file_fd = open(get_file_name(file, FALSE), O_RDONLY)) < 0)
 	{
-		error(OPEN, get_file_name(file));
+		error(OPEN, get_file_name(file, TRUE));
 		send_str("Open failed.\n", fd);
 		return (FALSE);
 	}
@@ -92,10 +96,10 @@ t_char			recv_file(char *file, int fd)
 	char	buf[BUFF_SIZE + 1];
 	ssize_t	i;
 
-	if ((file_fd = open(get_file_name(file), \
+	if ((file_fd = open(get_file_name(file, TRUE),						\
 						O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
 	{
-		error(OPEN, get_file_name(file));
+		error(OPEN, get_file_name(file, TRUE));
 		send_str("Open failed.\n", fd);
 		return (FALSE);
 	}

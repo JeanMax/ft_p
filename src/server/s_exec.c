@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 05:05:07 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/18 14:33:54 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/09/18 19:59:01 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern int		g_nb;
 
-static void		help(int c)
+static char		help(int c)
 {
 	send_str(" ls      -   list server's current directory\n", c);
 	send_str(" cd      -   change server's current directory\n", c);
@@ -45,6 +45,7 @@ static void		help(int c)
 	send_str(" lcd     -   change client's current directory\n", c);
 	send_str(" help    -   I guess you already found that one\n", c);
 	send_str("SUCCESS\n", c);
+	return (TRUE);
 }
 
 static void		exec_it(char **cmd_tab, int c_fd)
@@ -78,23 +79,21 @@ static char		exec_builtin(char *cmd, int c_fd)
 		whoami(c_fd);
 		send_str("prompt", c_fd);
 	}
-	else if (!ft_strncmp(cmd, "put", 3))
-	{
-		send_str(cmd, c_fd);
+	else if (!ft_strncmp(cmd, "put", 3) && send_str(cmd, c_fd))
 		recv_file(cmd, c_fd);
-	}
 	else if (!ft_strncmp(cmd, "get", 3))
 	{
 		if (!is_file(cmd + 4))
-			return (send_str("ERROR\n", c_fd), send_str("prompt", c_fd));
+		{
+			send_str("ERROR\n", c_fd);
+			send_str("prompt", c_fd);
+			return (TRUE);
+		}
 		send_str(cmd, c_fd);
 		send_file(cmd, c_fd);
 	}
-	else if (!ft_strcmp(cmd, "help"))
-	{
-		help(c_fd);
+	else if (!ft_strcmp(cmd, "help") && help(c_fd))
 		send_str("prompt", c_fd);
-	}
 	else
 		return (FALSE);
 	return (TRUE);
